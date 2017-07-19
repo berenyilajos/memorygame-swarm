@@ -1,0 +1,81 @@
+#service:
+#    name: ${service.name}
+#http://deltaspike.apache.org/documentation/projectstage.html
+org:
+  apache:
+    deltaspike:
+      ProjectStage: Development
+swarm:
+    project:
+        stage: default
+#    port:
+#        offset: "${swarm.port.offset}"
+    datasources:
+        data-sources:
+            MemoryGameDS:
+                driver-name: oracle
+                connection-url: jdbc:oracle:thin:@//localhost:1521/xe
+                jndi-name: java:/MemoryGameDS
+                user-name: HR
+                password: hr
+#                new-connection-sql: BEGIN EXECUTE IMMEDIATE 'ALTER SESSION SET CURRENT_SCHEMA=HUMO'; HUMO.AISESSION.initWebSession(); END;
+                min-pool-size: 1
+                max-pool-size: 20
+                check-valid-connection-sql: select ISVALIDSESSION from dual
+                valid-connection-checker-class-name: org.jboss.jca.adapters.jdbc.extensions.oracle.OracleValidConnectionChecker
+                validate-on-match: 1
+                background-validation: false
+                stale-connection-checker-class-name: org.jboss.jca.adapters.jdbc.extensions.oracle.OracleValidConnectionChecker
+                exception-sorter-class-name: org.jboss.jca.adapters.jdbc.extensions.oracle.OracleExceptionSorter
+                blocking-timeout-wait-millis: 5000
+                idle-timeout-minutes: 1
+                share-prepared-statements: false
+    undertow:
+        servlet-containers:
+            default:
+                allow-non-standard-wrappers: true
+    logging:
+        root-logger:
+            level: INFO
+            handlers:
+                - CONSOLE
+                - FILE
+                - SYSLOG
+        pattern-formatters:
+            FORMAT:
+                pattern: "%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p [thread:%t] [%c{10}] [sid:%X{extSessionId}] - %s%E%n"
+        console-handlers:
+            CONSOLE:
+                named-formatter: FORMAT
+        periodic-size-rotating-file-handlers:
+            FILE:
+                append: true
+                autoflush: true
+                file:
+                    path: log/memorygame/memorygame.log
+                named-formatter: FORMAT
+                rotate-size: 50M
+                suffix: .yyyy-MM-dd
+        syslog-handlers:
+            SYSLOG:
+                app-name: swarm-memorygame-service-app
+                enabled: true
+                port: 514
+                server-address: localhost
+                syslog-format: RFC5424
+#        loggers:
+#            org.wildfly.swarm.config:
+#               category: org.wildfly.swarm.config
+#               level: DEBUG
+#    mail:
+#        smtp:
+#            host: smtp.gmail.com
+#            port: 587
+#        mail-sessions:
+#            default:
+#                debug: false
+#                from: test1@epsglobal.eu
+#                smtp-server:
+#                    username: test1@epsglobal.eu
+#                    password: TeStEmAiL
+#                    tls: true

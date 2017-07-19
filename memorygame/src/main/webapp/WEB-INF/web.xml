@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>Restful Web Application</display-name>
+
+	<!-- Auto scan REST service -->
+	<!-- <context-param>
+		<param-name>resteasy.scan</param-name>
+		<param-value>true</param-value>
+	</context-param> -->
+	
+	<!--  logback -->
+    <env-entry>
+        <env-entry-name>logback/context-name</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>memorygameservice</env-entry-value>
+    </env-entry>
+    <listener>
+        <listener-class>ch.qos.logback.classic.selector.servlet.ContextDetachingSCL
+        </listener-class>
+    </listener>
+    <filter>
+        <filter-name>LoggerContextFilter</filter-name>
+        <filter-class>ch.qos.logback.classic.selector.servlet.LoggerContextFilter
+        </filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoggerContextFilter</filter-name>
+        <url-pattern>/game/*</url-pattern>
+    </filter-mapping>
+    <!--  logback -->
+	
+	<!-- <context-param>
+		<param-name>javax.ws.rs.Application</param-name>
+		<param-value>hu.icell.app.MyRestApplication</param-value>
+	</context-param>
+
+	this need same with resteasy servlet url-pattern
+	<context-param>
+		<param-name>resteasy.servlet.mapping.prefix</param-name>
+		<param-value>/game</param-value>
+	</context-param>
+
+	<listener>
+		<listener-class>
+			org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap
+		</listener-class>
+	</listener>
+
+	<servlet>
+		<servlet-name>resteasy-servlet</servlet-name>
+		<servlet-class>
+			org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher
+		</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>resteasy-servlet</servlet-name>
+		<url-pattern>/game/*</url-pattern>
+	</servlet-mapping> -->
+  
+  <!-- For web context -->
+    <!-- <servlet>
+        <servlet-name>memorygame-dispatcher</servlet-name>
+        <servlet-class>
+            org.springframework.web.servlet.DispatcherServlet
+        </servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/spring-web-config.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>memorygame-dispatcher</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping> -->
+  	
+  	<error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/views/error-404.jsp</location>
+    </error-page>
+  	
+</web-app>
