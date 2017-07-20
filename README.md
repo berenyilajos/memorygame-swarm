@@ -1,4 +1,4 @@
-﻿# memorygame-parent
+﻿# memorygame-swarm
 
 A program 8-as Javával futtatható.
 
