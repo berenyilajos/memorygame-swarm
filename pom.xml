@@ -4,10 +4,10 @@
   <artifactId>memorygame-swarm</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
+  <name>memorygame-nmfr</name>
   <modules>
-  	<module>memorygame</module>
-  	<module>memorygame-dao</module>
-  	<module>memorygame-action</module>
+  	<module>memorygame-bom</module>
+  	<module>memorygame-app</module>
   	<module>memorygame-common</module>
   	<module>memorygame-quartz</module>
   </modules>

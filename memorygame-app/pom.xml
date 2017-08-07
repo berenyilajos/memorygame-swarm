@@ -5,12 +5,13 @@
     <artifactId>memorygame-swarm</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>memorygame-quartz</artifactId>
-  <name>memorygame-quartz</name>
+  <artifactId>memorygame-app</artifactId>
   <packaging>pom</packaging>
+  <name>memorygame-app</name>
   <modules>
-  	<module>memorygame-quartz-job</module>
-  	<module>memorygame-quartz-listener</module>
+  	<module>memorygame</module>
+  	<module>memorygame-dao</module>
+  	<module>memorygame-action</module>
   </modules>
   
   <dependencyManagement>

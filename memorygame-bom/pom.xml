@@ -1,0 +1,252 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>hu.icell</groupId>
+		<artifactId>memorygame-nmfr</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>memorygame-bom</artifactId>
+	<packaging>pom</packaging>
+	<name>memorygame-bom</name>
+	<properties>
+		<version.memorygame-common-types>0.0.1-SNAPSHOT</version.memorygame-common-types>
+		<version.memorygame-common-entities>0.0.1-SNAPSHOT</version.memorygame-common-entities>
+		<version.memorygame-common-security>0.0.1-SNAPSHOT</version.memorygame-common-security>
+		<version.memorygame-common-exception>0.0.1-SNAPSHOT</version.memorygame-common-exception>
+		<version.memorygame-common-transaction>0.0.1-SNAPSHOT</version.memorygame-common-transaction>
+		<version.memorygame>0.0.1-SNAPSHOT</version.memorygame>
+		<version.memorygame-action>0.0.1-SNAPSHOT</version.memorygame-action>
+		<version.memorygame-dao>0.0.1-SNAPSHOT</version.memorygame-dao>
+		<version.memorygame-quartz-job>0.0.1-SNAPSHOT</version.memorygame-quartz-job>
+		<version.memorygame-quartz-listener>0.0.1-SNAPSHOT</version.memorygame-quartz-listener>
+		<version.org.apache.commons.commons-lang3>3.5</version.org.apache.commons.commons-lang3>
+		<version.javax.javaee-api>7.0</version.javax.javaee-api>
+		<version.org.codehaus.jackson.jackson-mapper-asl>1.9.13</version.org.codehaus.jackson.jackson-mapper-asl>
+		<version.xerces.xercesImpl>2.11.0</version.xerces.xercesImpl>
+		<version.org.hibernate.hibernate-entitymanager>5.2.10.Final</version.org.hibernate.hibernate-entitymanager>
+		<version.org.hibernate.javax.persistence.hibernate-jpa-2.1-api>1.0.0.Final</version.org.hibernate.javax.persistence.hibernate-jpa-2.1-api>
+		<deltaspike.version>1.7.2</deltaspike.version>
+		<version.javax.enterprise.cdi-api>2.0-PFD2</version.javax.enterprise.cdi-api>
+		<version.org.quartz-scheduler.quartz>2.3.0</version.org.quartz-scheduler.quartz>
+		<version.junit.junit>4.12</version.junit.junit>
+		<version.org.mockito.mockito-all>1.10.19</version.org.mockito.mockito-all>
+		<version.com.fasterxml.jackson.core.jackson-core>2.8.8</version.com.fasterxml.jackson.core.jackson-core>
+		<version.com.fasterxml.jackson.core.jackson-databind>2.8.8</version.com.fasterxml.jackson.core.jackson-databind>
+		<version.org.jboss.resteasy.resteasy-jaxrs>3.1.2.Final</version.org.jboss.resteasy.resteasy-jaxrs>
+		<version.ch.qos.logback.logback-classic>1.2.3</version.ch.qos.logback.logback-classic>
+	</properties>
+	<dependencyManagement>
+		<dependencies>
+
+			<!-- memorygame-common-types -->
+			<dependency>
+				<groupId>hu.icell</groupId>
+				<artifactId>memorygame-common-types</artifactId>
+				<version>${version.memorygame-common-types}</version>
+			</dependency>
+
+			<!-- memorygame-common-entities -->
+			<dependency>
+				<groupId>hu.icell</groupId>
+				<artifactId>memorygame-common-entities</artifactId>
+				<version>${version.memorygame-common-entities}</version>
+			</dependency>
+
+			<!-- memorygame-common-security -->
+			<dependency>
+				<groupId>hu.icell</groupId>
+				<artifactId>memorygame-common-security</artifactId>
+				<version>${version.memorygame-common-security}</version>
+			</dependency>
+
+			<!-- memorygame-common-exception -->
+			<dependency>
+				<groupId>hu.icell</groupId>
+				<artifactId>memorygame-common-exception</artifactId>
+				<version>${version.memorygame-common-exception}</version>
+			</dependency>
+
+			<!-- memorygame-common-security -->
+			<dependency>
+				<groupId>hu.icell</groupId>
+				<artifactId>memorygame-common-transaction</artifactId>
+				<version>${version.memorygame-common-transaction}</version>
+			</dependency>
+
+			<!-- memorygame -->
+			<dependency>
+				<groupId>hu.icell</groupId>
+				<artifactId>memorygame</artifactId>
+				<version>${version.memorygame}</version>
+			</dependency>
+
+			<!-- memorygame-action -->
+			<dependency>
+				<groupId>hu.icell</groupId>
+				<artifactId>memorygame-action</artifactId>
+				<version>${version.memorygame-action}</version>
+			</dependency>
+
+			<!-- memorygame-dao -->
+			<dependency>
+				<groupId>hu.icell</groupId>
+				<artifactId>memorygame-dao</artifactId>
+				<version>${version.memorygame-dao}</version>
+			</dependency>
+
+			<!-- memorygame-quartz-job -->
+			<dependency>
+				<groupId>hu.icell</groupId>
+				<artifactId>memorygame-quartz-job</artifactId>
+				<version>${version.memorygame-quartz-job}</version>
+			</dependency>
+
+			<!-- memorygame-quartz-listener -->
+			<dependency>
+				<groupId>hu.icell</groupId>
+				<artifactId>memorygame-quartz-listener</artifactId>
+				<version>${version.memorygame-quartz-listener}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>${version.org.apache.commons.commons-lang3}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax</groupId>
+				<artifactId>javaee-api</artifactId>
+				<version>${version.javax.javaee-api}</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.codehaus.jackson</groupId>
+				<artifactId>jackson-mapper-asl</artifactId>
+				<version>${version.org.codehaus.jackson.jackson-mapper-asl}</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.jboss.resteasy</groupId>
+				<artifactId>resteasy-jaxrs</artifactId>
+				<version>${version.org.jboss.resteasy.resteasy-jaxrs}</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>${version.ch.qos.logback.logback-classic}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>xerces</groupId>
+				<artifactId>xercesImpl</artifactId>
+				<version>${version.xerces.xercesImpl}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-entitymanager</artifactId>
+				<version>${version.org.hibernate.hibernate-entitymanager}</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.hibernate.javax.persistence</groupId>
+				<artifactId>hibernate-jpa-2.1-api</artifactId>
+				<version>${version.org.hibernate.javax.persistence.hibernate-jpa-2.1-api}</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>com.oracle</groupId>
+				<artifactId>ojdbc6</artifactId>
+				<version>11.2.03</version>
+			</dependency>
+
+			<!-- apache-deltaspike -->
+			<dependency>
+				<groupId>org.apache.deltaspike.core</groupId>
+				<artifactId>deltaspike-core-api</artifactId>
+				<version>${deltaspike.version}</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.deltaspike.core</groupId>
+				<artifactId>deltaspike-core-impl</artifactId>
+				<version>${deltaspike.version}</version>
+				<scope>runtime</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.deltaspike.modules</groupId>
+				<artifactId>deltaspike-jpa-module-api</artifactId>
+				<version>${deltaspike.version}</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.deltaspike.modules</groupId>
+				<artifactId>deltaspike-jpa-module-impl</artifactId>
+				<version>${deltaspike.version}</version>
+				<!-- <scope>runtime</scope> -->
+			</dependency>
+			<dependency>
+				<groupId>org.apache.deltaspike.modules</groupId>
+				<artifactId>deltaspike-security-module-api</artifactId>
+				<version>${deltaspike.version}</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.deltaspike.modules</groupId>
+				<artifactId>deltaspike-security-module-impl</artifactId>
+				<version>${deltaspike.version}</version>
+				<scope>runtime</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.enterprise</groupId>
+				<artifactId>cdi-api</artifactId>
+				<version>${version.javax.enterprise.cdi-api}</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-core</artifactId>
+				<version>${version.com.fasterxml.jackson.core.jackson-core}</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>${version.com.fasterxml.jackson.core.jackson-databind}</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.quartz-scheduler</groupId>
+				<artifactId>quartz</artifactId>
+				<version>${version.org.quartz-scheduler.quartz}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${version.junit.junit}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-all</artifactId>
+				<version>${version.org.mockito.mockito-all}</version>
+				<scope>test</scope>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+</project>

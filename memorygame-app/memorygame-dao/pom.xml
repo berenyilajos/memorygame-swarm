@@ -1,0 +1,36 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>hu.icell</groupId>
+    <artifactId>memorygame-app</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>memorygame-dao</artifactId>
+  <name>memorygame-dao</name>
+  <dependencies>
+		<dependency>
+			<groupId>hu.icell</groupId>
+		  	<artifactId>memorygame-common-entities</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>hu.icell</groupId>
+		  	<artifactId>memorygame-common-exception</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>hu.icell</groupId>
+		  	<artifactId>memorygame-common-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>hu.icell</groupId>
+		  	<artifactId>memorygame-common-transaction</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.enterprise</groupId>
+			<artifactId>cdi-api</artifactId>
+		</dependency>
+	</dependencies>
+</project>
