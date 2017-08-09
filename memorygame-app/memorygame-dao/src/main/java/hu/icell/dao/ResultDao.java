@@ -47,11 +47,15 @@ public class ResultDao {
         if (seconds < MIN_SECONDS) {
             throw new MyApplicationException(LESS_SECONDS_MESSAGE);
         }
-        Result r = new Result();
-        r.setResultDate(Calendar.getInstance().getTime());
-        r.setSeconds(BigDecimal.valueOf(seconds));
-        r.setUser(em.find(User.class, userId));
-        em.persist(r);
+        try {
+            Result r = new Result();
+            r.setResultDate(Calendar.getInstance().getTime());
+            r.setSeconds(BigDecimal.valueOf(seconds));
+            r.setUser(em.find(User.class, userId));
+            em.persist(r);
+        } catch (Exception e) {
+            throw new MyApplicationException(e.getMessage());
+        }
     }
 
 }
