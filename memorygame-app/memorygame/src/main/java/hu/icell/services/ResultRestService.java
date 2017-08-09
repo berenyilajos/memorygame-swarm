@@ -13,8 +13,8 @@ import javax.ws.rs.core.MediaType;
 import hu.icell.actions.ResultAction;
 import hu.icell.entities.User;
 import hu.icell.exception.*;
-import hu.icell.xsdpojo.ResultResponseType;
-import hu.icell.xsdpojo.WrapperObject;
+import hu.icell.xsdpojo.ResultResponse;
+import hu.icell.xsdpojo.ResultRequest;
 import hu.icell.xsdpojo.common.SuccessType;
 
 @Path("/result")
@@ -28,19 +28,19 @@ public class ResultRestService extends BaseService {
     @Path("/save")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public ResultResponseType saveAction(@Context HttpServletRequest request,  WrapperObject wrapperObject) throws MyApplicationException {
+    public ResultResponse saveAction(@Context HttpServletRequest request,  ResultRequest resultRequest) throws MyApplicationException {
         
         try {
-            validateByXSD(wrapperObject, XSD_POJO);
+            validateByXSD(resultRequest, XSD_POJO);
         } catch (Exception e) {
             throw new MyApplicationException(e.getMessage());
         }
         
-        ResultResponseType resultResponse = new ResultResponseType();
+        ResultResponse resultResponse = new ResultResponse();
 //        Integer seconds = Integer.parseInt(wrapperObject.get("seconds").toString());
 //        Long userId = Long.parseLong(wrapperObject.get("userId").toString());
-        Integer seconds = wrapperObject.getSeconds();
-        Long userId = wrapperObject.getUserId();
+        Integer seconds = resultRequest.getSeconds();
+        Long userId = resultRequest.getUserId();
         resultResponse.setSeconds(seconds);
         HttpSession session = request.getSession(false);
         User user;

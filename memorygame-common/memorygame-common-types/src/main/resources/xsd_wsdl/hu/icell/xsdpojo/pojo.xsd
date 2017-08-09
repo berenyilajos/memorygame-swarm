@@ -9,7 +9,7 @@
 	<xs:simpleType name="ResultType">
 		<xs:restriction base="common:SuccessType" />
 	</xs:simpleType>
-	<xs:element name="ResultResponseType">
+	<xs:element name="ResultResponse">
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element name="success" type="ResultType" nillable="false" />
@@ -18,7 +18,7 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-	<xs:element name="WrapperObject">
+	<xs:element name="ResultRequest">
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element name="userId" type="xs:long" minOccurs="1" />
