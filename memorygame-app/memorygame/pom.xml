@@ -14,6 +14,7 @@
 		<wildfly.swarm.version>2017.7.0</wildfly.swarm.version>
 		<maven-war-plugin.version>3.1.0</maven-war-plugin.version>
 		<maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
+        <liquibase-maven-plugin.version>3.5.3</liquibase-maven-plugin.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -74,6 +75,11 @@
 		   <artifactId>transactions</artifactId>
 		   <version>${wildfly.swarm.version}</version>
 		</dependency>
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+            <version>${liquibase-maven-plugin.version}</version>
+        </dependency>
 		
 		<dependency>
 		    <groupId>com.oracle</groupId>
@@ -110,14 +116,102 @@
 			             <java.net.preferIPv4Stack>true</java.net.preferIPv4Stack>
 			         </properties>
 			      </configuration>
-	            <executions>
-	               <execution>
-	                  <goals>
-	                     <goal>package</goal>
-	                  </goals>
-	               </execution>
-	            </executions>
 	         </plugin>
+            <plugin>
+				<groupId>org.liquibase</groupId>
+				<artifactId>liquibase-maven-plugin</artifactId>
+                <version>${liquibase-maven-plugin.version}</version>
+                <configuration>                  
+					<propertyFile>liquibase-ods.properties</propertyFile>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+                            <goal>clearCheckSums</goal>
+                            <goal>dropAll</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
+    <profiles>
+		<profile>
+			<id>ods</id>
+			<properties>
+				<liquibase.table.prefix>not_</liquibase.table.prefix>
+				<ods.service.name>ods</ods.service.name>
+				<liquibase.schema>cp_ods</liquibase.schema>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-resources-plugin</artifactId>
+					</plugin>
+					<plugin>
+						<groupId>org.liquibase</groupId>
+						<artifactId>liquibase-maven-plugin</artifactId>
+						<configuration>                  
+							<propertyFile>liquibase-ods.properties</propertyFile>
+						</configuration>
+						<executions>
+							<execution>
+								<phase>process-resources</phase>
+								<goals>
+							        <goal>update</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>liquibase</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.liquibase</groupId>
+						<artifactId>liquibase-maven-plugin</artifactId>
+                        <configuration>                  
+							<propertyFile>liquibase-ods.properties</propertyFile>
+						</configuration>
+						<executions>
+							<execution>
+								<phase>process-resources</phase>
+								<goals>
+							        <goal>update</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>package</id>
+			<build>
+                <plugins>
+				    <plugin>
+	                    <groupId>org.wildfly.swarm</groupId>
+	                    <artifactId>wildfly-swarm-plugin</artifactId>
+	                    <version>${wildfly.swarm.version}</version>
+	                    <configuration>
+			                 <properties>
+			                     <java.net.preferIPv4Stack>true</java.net.preferIPv4Stack>
+			                 </properties>
+			              </configuration>
+	                    <executions>
+	                       <execution>
+	                          <goals>
+	                             <goal>package</goal>
+	                          </goals>
+	                       </execution>
+	                    </executions>
+	                 </plugin>
+                </plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
