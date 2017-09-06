@@ -3,12 +3,16 @@
 A program 8-as Javával futtatható.
 
 Adatbázis:
-Oracle 10 XE
-Először hozzuk létre a táblákat a usersResultCreate.sql futtatásával.
+Oracle 10 XE (de 11-es adatbázis is megteszi)
+
+Először hozzuk létre az MG user/schema-t (jelszó 'mg').
+Majd a mamorygame-app/memorygame mappába lépve futtassuk a mvn clean install -P liquibase parancsot, amivel létrehozzuk a USERS és RESULT táblákat
+/** Alternatív megoldás:
+Hozzuk létre a táblákat a usersResultCreate.sql futtatásával.
 Ez pl. SQLDeveloperben egyben lefuttatható,
-de pl. az Oracle 10 Xe böngészős adatbáziskezelőjében a "/" jelekkel elválasztott részeket egyenként kell futtatni.
+de pl. az Oracle 10 Xe böngészős adatbáziskezelőjében (apex) a "/" jelekkel elválasztott részeket egyenként kell futtatni.
 Utána az alapadatokat a csv (először a users, majd a result) file-okból importáljuk,
-vagy a usereket regisztráció útján is létre lehet hozni.
+vagy a usereket regisztráció útján is létre lehet hozni. **/
 
 A projektben levő com.oracle.ojdbc6 dependenciről:
 Ez privát nexus repóból való, ha ilyened nincsen, akkor a memorygame-common-entities (ebben csak a Hibernate-es entity generálás táblából miatt van)

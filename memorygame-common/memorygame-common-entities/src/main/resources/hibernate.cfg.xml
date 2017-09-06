@@ -4,10 +4,10 @@
 <hibernate-configuration>
  <session-factory name="">
   <property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
-  <property name="hibernate.connection.password">hr</property>
+  <property name="hibernate.connection.password">mg</property>
   <property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:xe</property>
-  <property name="hibernate.connection.username">HR</property>
-  <property name="hibernate.default_schema">HR</property>
+  <property name="hibernate.connection.username">MG</property>
+  <property name="hibernate.default_schema">MG</property>
   <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
   <mapping class="hu.icell.entities.User"/>
   <mapping class="hu.icell.entities.Result"/>

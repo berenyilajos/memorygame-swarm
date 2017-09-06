@@ -16,8 +16,8 @@ swarm:
                 driver-name: oracle
                 connection-url: jdbc:oracle:thin:@//localhost:1521/xe
                 jndi-name: java:/MemoryGameDS
-                user-name: HR
-                password: hr
+                user-name: MG
+                password: mg
 #                new-connection-sql: BEGIN EXECUTE IMMEDIATE 'ALTER SESSION SET CURRENT_SCHEMA=HUMO'; HUMO.AISESSION.initWebSession(); END;
                 min-pool-size: 1
                 max-pool-size: 20
