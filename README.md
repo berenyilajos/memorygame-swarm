@@ -5,7 +5,7 @@ A program 8-as Javával futtatható.
 Adatbázis:
 Oracle 10 XE (de 11-es adatbázis is megteszi)
 
-Először hozzuk létre az MG user/schema-t (jelszó 'mg').
+Először hozzuk létre az MG user/schema-t (jelszó 'mg'), a createMGuser.sql segítségével.
 Majd a mamorygame-app/memorygame mappába lépve futtassuk a mvn clean install -P liquibase parancsot, amivel létrehozzuk a USERS és RESULT táblákat
 /** Alternatív megoldás:
 Hozzuk létre a táblákat a usersResultCreate.sql futtatásával.
@@ -22,6 +22,6 @@ A memorygame-swarm mappában mvn clean install.
 Utána a memorygame mappában mvn wildfly-swarm:package.
 Ezután a memorygame/target mappából futtatható a java -jar memorygame-swarm.jar paranccsal.
 
-Ezután az oldal elérhető a localhost:8080/memorygame url-en.
+Ezután az oldal elérhető a localhost:8484/memorygame url-en.
 
 Jó játékot!
