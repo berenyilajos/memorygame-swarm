@@ -1,6 +1,9 @@
 ﻿# memorygame-swarm
 
+Rendszerfeltételek:
+
 A program 8-as Javával futtatható.
+Maven: 3.3.9 vagy 3.5.0
 
 Adatbázis:
 Oracle 10 XE (de 11-es adatbázis is megteszi)
