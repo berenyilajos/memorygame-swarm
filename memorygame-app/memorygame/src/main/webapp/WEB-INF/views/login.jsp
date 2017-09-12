@@ -7,6 +7,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Login</title>
 <link rel="stylesheet" href="<c:url value="/resources/css/style.css" />"/>
+<script type="text/javascript">
+	window.onload = function() {
+		document.getElementById("username").focus();
+	};
+</script>
 </head>
 <body>
 	<div id="body">
@@ -18,12 +23,12 @@
 		</div>
 		<h3>Login</h3>
 		<% String msg = (String)request.getAttribute("msg"); if (msg == null) msg = ""; %>
-	<form action="<%= request.getContextPath() %>/game/login" METHOD="POST">
-		Username <input type="text" name="username" required /><br>
-		Password <input type="password" name="password" required /><br>
-		<input type="submit" value="Login" /><br>
-		<span class="error"><%= msg %></span>
-	</form>
+        <form action="<%= request.getContextPath() %>/game/login" METHOD="POST">
+            Username <input type="text" name="username" id="username" required /><br>
+            Password <input type="password" name="password" required /><br>
+            <input type="submit" value="Login" /><br>
+            <span class="error"><%= msg %></span>
+        </form>
 	</div>
 </body>
 </html>

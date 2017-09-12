@@ -40,10 +40,6 @@
 							<sourceRoot>${basedir}/target/generated-sources/src/main/java</sourceRoot>
 							<xsdOptions>
 								<xsdOption>
-									<xsd>src/main/resources/xsd_wsdl/hu/icell/xsdpojo/common/common.xsd</xsd>
-									<extension>true</extension>
-								</xsdOption>
-								<xsdOption>
 									<xsd>src/main/resources/xsd_wsdl/hu/icell/xsdpojo/pojo.xsd</xsd>
 									<extension>true</extension>
 								</xsdOption>

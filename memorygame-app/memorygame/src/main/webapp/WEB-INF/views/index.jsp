@@ -197,7 +197,7 @@
                             if (this.getAttribute("data-image") === elozokartya.getAttribute("data-image")) {
                                 hattalVan -= 2;
                                 if (hattalVan === 0) {
-									setTimeout(kesz, 0);
+									kesz();
                                 }
                             } else {
                                 setTimeout(leFordit, 1000, this);
@@ -256,7 +256,9 @@
             	    	alert("Kész!\nEredmény: " + seconds + " másodperc.\n" + mentes);
             	    	console.log(http.responseText);
             	    } else if (http.readyState == 4) {
-            	    	alert("Kész!\nEredmény: " + seconds + " másodperc.");
+            	    	setTimeout(function () {
+                            alert("Kész!\nEredmény: " + seconds + " másodperc.");
+                        }, 100);
                 	}
             	}
             	http.send(params);
