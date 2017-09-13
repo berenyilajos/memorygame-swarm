@@ -256,9 +256,7 @@
             	    	alert("Kész!\nEredmény: " + seconds + " másodperc.\n" + mentes);
             	    	console.log(http.responseText);
             	    } else if (http.readyState == 4) {
-            	    	setTimeout(function () {
-                            alert("Kész!\nEredmény: " + seconds + " másodperc.");
-                        }, 100);
+            	    	alert("Kész!\nEredmény: " + seconds + " másodperc.");
                 	}
             	}
             	http.send(params);
