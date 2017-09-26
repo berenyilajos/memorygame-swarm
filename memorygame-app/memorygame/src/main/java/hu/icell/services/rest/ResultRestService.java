@@ -1,4 +1,4 @@
-package hu.icell.services;
+package hu.icell.services.rest;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +10,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import hu.icell.services.BaseService;
 import hu.icell.actions.ResultAction;
 import hu.icell.entities.User;
 import hu.icell.exception.*;

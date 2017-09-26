@@ -50,20 +50,14 @@
                 }
                 var pictures = [];
                 for (var i = 0; i < db; i++) {
-                    var van;
+                    var j, p;
                     do {
-                        var p = kepek[Math.floor(Math.random() * kepszam)];
-                        van = false;
-                        for (var j = 0; j < i; j++) {
-                            if (pictures[j] === p) {
-                                van = true;
-                            }
-                        }
-                        if (!van) {
-                            pictures[i] = p;
-                        }
+                        p = kepek[Math.floor(Math.random() * kepszam)];
+                        j = 0;
+                        while(pictures[j] !== p && ++j < i);
                     }
-                    while (van);
+                    while (j < i);
+                    pictures[i] = p;
                 }
                 return pictures;
             }
@@ -72,19 +66,13 @@
                 var pictures = getPictures(db / 2);
                 var kepek2 = [];
                 for (var i = 0; i < db / 2; i++) {
-                    var van;
+                    var index;
                     for (var j = 0; j < 2; j++) {
                         do {
-                            van = false;
-                            var index = Math.floor(Math.random() * db);
-                            if (kepek2[index] !== undefined) {
-                                van = true;
-                            }
-                            if (!van) {
-                                kepek2[index] = pictures[i];
-                            }
+                            index = Math.floor(Math.random() * db);
                         }
-                        while (van);
+                        while (kepek2[index] !== undefined);
+                        kepek2[index] = pictures[i];
                     }
                 }
                 return kepek2;

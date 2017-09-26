@@ -36,6 +36,7 @@
 		<version.org.jboss.resteasy.resteasy-jaxrs>3.1.2.Final</version.org.jboss.resteasy.resteasy-jaxrs>
 		<version.ch.qos.logback.logback-classic>1.2.3</version.ch.qos.logback.logback-classic>
 		<version.com.oracle.ojdbc6>11.2.03</version.com.oracle.ojdbc6>
+		<version.commons-io.commons-io>2.4</version.commons-io.commons-io>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -225,6 +226,13 @@
 				<groupId>com.fasterxml.jackson.core</groupId>
 				<artifactId>jackson-databind</artifactId>
 				<version>${version.com.fasterxml.jackson.core.jackson-databind}</version>
+				<scope>provided</scope>
+			</dependency>
+			
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>${version.commons-io.commons-io}</version>
 				<scope>provided</scope>
 			</dependency>
 

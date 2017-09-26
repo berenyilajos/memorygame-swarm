@@ -8,18 +8,18 @@
   <artifactId>memorygame-dao</artifactId>
   <name>memorygame-dao</name>
   <dependencies>
-		<dependency>
-			<groupId>hu.icell</groupId>
-		  	<artifactId>memorygame-common-entities</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>hu.icell</groupId>
-		  	<artifactId>memorygame-common-exception</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>hu.icell</groupId>
-		  	<artifactId>memorygame-common-security</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>hu.icell</groupId>
+            <artifactId>memorygame-common-entities</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>hu.icell</groupId>
+            <artifactId>memorygame-common-exception</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>hu.icell</groupId>
+            <artifactId>memorygame-common-security</artifactId>
+        </dependency>
 		<dependency>
 			<groupId>hu.icell</groupId>
 		  	<artifactId>memorygame-common-transaction</artifactId>

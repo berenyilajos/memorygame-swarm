@@ -54,6 +54,10 @@
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 		</dependency>
+        <dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+		</dependency>
 		<!-- Wildfly Swarm dependencies -->
 		<dependency>
 		   <groupId>org.wildfly.swarm</groupId>
@@ -84,6 +88,30 @@
 	<build>
 		<finalName>memorygame</finalName>
 		<plugins>
+			<plugin>
+				<groupId>com.sun.jersey.contribs</groupId>
+				<artifactId>maven-wadl-plugin</artifactId>
+				<version>1.19.4</version>
+				<dependencies>
+					<dependency>
+						<groupId>hu.icell</groupId>
+						<artifactId>memorygame-common-types</artifactId>
+						<version>${project.version}</version>
+					</dependency>
+                    <dependency>
+						<groupId>hu.icell</groupId>
+						<artifactId>memorygame-common-exception</artifactId>
+						<version>${project.version}</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<baseUri>http://localhost:8080/memorygame/game</baseUri>
+					<packagesResourceConfig>
+						<param>hu.icell.services.rest</param>
+						<param>hu.icell.xsdpojo</param>
+					</packagesResourceConfig>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>

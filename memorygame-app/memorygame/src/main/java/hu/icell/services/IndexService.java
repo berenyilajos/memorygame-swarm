@@ -21,14 +21,14 @@ import hu.icell.actions.IndexAction;
 import hu.icell.entities.User;
 import hu.icell.exception.UserAllreadyExistException;
 
-@Path("/")
+@Path("")
 public class IndexService {
     @Inject
     private IndexAction indexAction;
     
     @GET
     @Produces(MediaType.TEXT_HTML)
-    @Path("/")
+//    @Path("")
     public void indexAction(@Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("user") == null) {

@@ -28,4 +28,6 @@ Ezután a memorygame/target mappából futtatható a java -jar memorygame-swarm.
 
 Ezután az oldal elérhető a localhost:8484/memorygame url-en.
 
+Wadl file információk: localhost:8484/memorygame/game/application.wadl
+
 Jó játékot!
