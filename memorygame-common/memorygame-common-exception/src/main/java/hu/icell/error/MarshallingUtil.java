@@ -10,8 +10,8 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import hu.icell.common.logger.AppLogger;
+import hu.icell.common.logger.LoggerProducer;
 
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
@@ -26,7 +26,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class MarshallingUtil {
 
-    private static Logger log = LoggerFactory.getLogger(MarshallingUtil.class);
+    private static AppLogger log = LoggerProducer.getStaticLogger(MarshallingUtil.class);
 
     /**
      * Private constructor.

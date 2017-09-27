@@ -10,10 +10,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
-import hu.icell.services.BaseService;
 import hu.icell.actions.ResultAction;
+import hu.icell.common.logger.AppLogger;
+import hu.icell.common.logger.ThisLogger;
 import hu.icell.entities.User;
-import hu.icell.exception.*;
+import hu.icell.exception.MyApplicationException;
+import hu.icell.services.BaseService;
 import hu.icell.xsdpojo.ResultResponse;
 import hu.icell.xsdpojo.ResultRequest;
 import hu.icell.xsdpojo.common.SuccessType;
@@ -23,6 +25,10 @@ public class ResultRestService extends BaseService {
     @Inject
     private ResultAction resultAction;
     
+    @Inject
+    @ThisLogger
+    private AppLogger log;
+    
     public static final String XSD_POJO = "xsd_wsdl/hu/icell/xsdpojo/pojo.xsd";
     
     @POST
@@ -31,10 +37,12 @@ public class ResultRestService extends BaseService {
     @Produces(MediaType.APPLICATION_JSON)
     public ResultResponse saveAction(@Context HttpServletRequest request,  ResultRequest resultRequest) throws MyApplicationException {
         
+        log.debug("ResultRestService.saveAction >>>");
         try {
             validateByXSD(resultRequest, XSD_POJO);
         } catch (Exception e) {
-            throw new MyApplicationException(e.getMessage());
+            log.warn(e.getMessage(), e);
+            throw new MyApplicationException("Save unsuccessful: " + e.getMessage());
         }
         
         ResultResponse resultResponse = new ResultResponse();
@@ -56,7 +64,9 @@ public class ResultRestService extends BaseService {
         }
         resultAction.saveResult(seconds, userId);
         resultResponse.setSuccess(SuccessType.SUCCESS);
+        resultResponse.setUserId(userId);
         //validateByXSD(resultResponse, XSD_POJO);
+        log.debug("<<< ResultRestService.saveAction");
         return resultResponse;
     }
 }

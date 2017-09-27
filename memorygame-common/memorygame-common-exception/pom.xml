@@ -10,7 +10,7 @@
   <dependencies>
 		<dependency>
 			<groupId>hu.icell</groupId>
-			<artifactId>memorygame-quartz-listener</artifactId>
+			<artifactId>memorygame-common-jaxutils</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>hu.icell</groupId>

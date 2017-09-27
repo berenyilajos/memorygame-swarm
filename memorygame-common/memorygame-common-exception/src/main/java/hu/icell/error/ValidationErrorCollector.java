@@ -2,8 +2,8 @@ package hu.icell.error;
 
 import java.util.ArrayList;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import hu.icell.common.logger.AppLogger;
+import hu.icell.common.logger.LoggerProducer;
 
 import javax.xml.bind.ValidationEvent;
 import javax.xml.bind.ValidationEventHandler;
@@ -11,7 +11,8 @@ import javax.xml.bind.ValidationEventHandler;
 public class ValidationErrorCollector implements ValidationEventHandler {
 
     private ArrayList<XMLValidationError> errors = new ArrayList<XMLValidationError>();
-    private static Logger log = LoggerFactory.getLogger(ValidationErrorCollector.class);
+    
+    private static AppLogger log = LoggerProducer.getStaticLogger(ValidationErrorCollector.class);
 
     private String getField(String msg, String first, String last) {
         String ret = "";

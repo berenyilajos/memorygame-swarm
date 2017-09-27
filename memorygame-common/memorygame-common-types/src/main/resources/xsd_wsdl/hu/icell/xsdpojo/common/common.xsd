@@ -24,4 +24,12 @@
 			<xs:minInclusive value="10" />
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:complexType name="DataType">
+		<xs:sequence minOccurs="0">
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DataObject">
+		<xs:sequence minOccurs="0">
+		</xs:sequence>
+	</xs:complexType>
 </xs:schema>

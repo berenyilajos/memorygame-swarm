@@ -18,23 +18,32 @@ import javax.ws.rs.core.MediaType;
 import org.apache.commons.lang3.StringUtils;
 
 import hu.icell.actions.IndexAction;
+import hu.icell.common.logger.AppLogger;
+import hu.icell.common.logger.ThisLogger;
 import hu.icell.entities.User;
 import hu.icell.exception.UserAllreadyExistException;
 
 @Path("")
 public class IndexService {
+    
     @Inject
     private IndexAction indexAction;
+    
+    @Inject
+    @ThisLogger
+    private AppLogger log;
     
     @GET
     @Produces(MediaType.TEXT_HTML)
 //    @Path("")
     public void indexAction(@Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException, ServletException {
+        log.debug("IndexService.indexAction >>>");
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("user") == null) {
             response.sendRedirect("/memorygame/game/login");
             return;
         }
+        log.debug("<<< IndexService.indexAction");
         request.getRequestDispatcher("/WEB-INF/views/index.jsp")
         .forward(request, response);
     }
@@ -45,6 +54,7 @@ public class IndexService {
     @Path("/login")
     public void loginAction(@Context HttpServletRequest request, @Context HttpServletResponse response, @FormParam("username") String username,
             @FormParam("password") String password) throws ServletException, IOException {
+        log.debug("IndexService.loginAction, username=[{}] >>>", username);
         String msg = "";
         if (StringUtils.isNotBlank(username) && StringUtils.isNotBlank(password)) {
             User user = indexAction.getUserByUsernameAndPassword(username, password);
@@ -58,6 +68,7 @@ public class IndexService {
             }
         }
         request.setAttribute("msg", msg);
+        log.debug("<<< IndexService.loginAction");
         
         request.getRequestDispatcher("/WEB-INF/views/login.jsp")
         .forward(request, response);
@@ -68,13 +79,13 @@ public class IndexService {
     @Produces(MediaType.TEXT_HTML)
     @Path("/logout")
     public void logoutAction(@Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException {
-        
         HttpSession session = request.getSession(false);
+        log.debug("IndexService.logoutAction, username=[{}] >>>", session != null ? (User)session.getAttribute("user") : null);
         if (session != null) {
             session.setAttribute("user", null);
             session = null;
         }
-        
+        log.debug("<<< IndexService.logoutAction");
         response.sendRedirect("/memorygame/game/login");
 
     }
@@ -86,7 +97,7 @@ public class IndexService {
     public void registerAction(@Context HttpServletRequest request, @Context HttpServletResponse response,
             @FormParam("username") String username,
             @FormParam("password") String password, @FormParam("password2") String password2) throws ServletException, IOException {
-        
+        log.debug("IndexService.registerAction, username=[{}] >>>", username);
         String msg = "";
         if (StringUtils.isNotBlank(username) && StringUtils.isNotBlank(password) && StringUtils.isNotBlank(password2)) {
 //            if (indexAction.getUserByUsername(username) != null) {
@@ -106,6 +117,7 @@ public class IndexService {
             }
         }
         request.setAttribute("msg", msg);
+        log.debug("<<< IndexService.registerAction");
         
         request.getRequestDispatcher("/WEB-INF/views/register.jsp")
         .forward(request, response);

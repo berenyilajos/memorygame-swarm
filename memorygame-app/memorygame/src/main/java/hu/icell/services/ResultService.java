@@ -16,6 +16,8 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import hu.icell.actions.ResultAction;
+import hu.icell.common.logger.AppLogger;
+import hu.icell.common.logger.ThisLogger;
 import hu.icell.entities.Result;
 import hu.icell.entities.User;
 
@@ -23,6 +25,10 @@ import hu.icell.entities.User;
 public class ResultService {
     @Inject
     private ResultAction resultAction;
+    
+    @Inject
+    @ThisLogger
+    private AppLogger log;
     
 //  @PersistenceUnit(unitName="memorygame")
 //  private EntityManagerFactory emf;
@@ -46,6 +52,7 @@ public class ResultService {
 //      q.setMaxResults(20);
 //      List<Result> list = q.getResultList();
         
+        log.debug("ResultService.listAction >>>");
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("user") == null) {
             response.sendRedirect("/memorygame/game/login");
@@ -56,6 +63,7 @@ public class ResultService {
 //      em.getTransaction().commit();
         
         request.setAttribute("list", list);
+        log.debug("<<< ResultService.listAction");
         
         request.getRequestDispatcher("/WEB-INF/views/result/results.jsp")
         .forward(request, response);
@@ -66,7 +74,7 @@ public class ResultService {
     @Path("/{userId:\\d+}")
     public void showAction(@Context HttpServletRequest request, @Context HttpServletResponse response, @PathParam("userId") String userId)
             throws ServletException, IOException {
-        
+        log.debug("ResultService.showAction, userId=[{}] >>>", userId);
         HttpSession session = request.getSession(false);
         User user;
         if (session == null || (user = (User)session.getAttribute("user")) == null || user.getId() != Long.parseLong(userId)) {
@@ -75,6 +83,7 @@ public class ResultService {
         }
         List<Result> list = resultAction.getResultsByUser(user);
         request.setAttribute("list", list);
+        log.debug("<<< ResultService.showAction");
         
         request.getRequestDispatcher("/WEB-INF/views/result/userresult.jsp")
         .forward(request, response);

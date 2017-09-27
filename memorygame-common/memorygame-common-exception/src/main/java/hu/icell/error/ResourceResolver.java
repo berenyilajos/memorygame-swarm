@@ -8,13 +8,13 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.xml.transform.stream.StreamSource;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.xerces.dom.DOMInputImpl;
 import org.w3c.dom.ls.LSInput;
 import org.w3c.dom.ls.LSResourceResolver;
+
+import hu.icell.common.logger.AppLogger;
+import hu.icell.common.logger.LoggerProducer;
 
 /**
  * 
@@ -29,7 +29,7 @@ public final class ResourceResolver implements LSResourceResolver {
     //jo az, h ez itt concurrentHashMap?
     private static ConcurrentHashMap<String, StreamSource> xsdCache = new ConcurrentHashMap<String, StreamSource>(); 
 
-    private static Logger log = LoggerFactory.getLogger(ResourceResolver.class);
+    private static AppLogger log = LoggerProducer.getStaticLogger(ResourceResolver.class);
 
     public ResourceResolver(String xsdDirPath, StringBuilder errors) {
         this.errors = errors;

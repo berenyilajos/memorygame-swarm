@@ -3,22 +3,30 @@ package hu.icell.services;
 import java.io.InputStream;
 import java.io.StringWriter;
 
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 
+import hu.icell.common.logger.AppLogger;
+import hu.icell.common.logger.ThisLogger;
 import hu.icell.error.MarshallingUtil;
 import hu.icell.error.MyErrorHandler;
 import hu.icell.error.ValidationErrorCollector;
 
+@Named
 public class BaseService {
     
-    private static Logger log = LoggerFactory.getLogger(BaseService.class);
+//    private static Logger log = LoggerFactory.getLogger(BaseService.class);
+    @Inject
+    @ThisLogger
+    private AppLogger log;
     
     protected void validateByXSD(Object xmlObject, String xsd) throws Exception {
         StringWriter stringWriter = new StringWriter();

@@ -215,7 +215,7 @@
                 var seconds = Math.floor((new Date().getTime() - datum) / 1000);
                 // alert("Kész!\nEredmény: " + seconds + " másodperc.");
                 reset();
-                if (darab == 6) {
+                if (darab === 6) {
                 	ment(seconds);
                 } else {
                 	alert("Kész!\nEredmény: " + seconds + " másodperc.");
@@ -243,7 +243,11 @@
                 	    }
             	    	alert("Kész!\nEredmény: " + seconds + " másodperc.\n" + mentes);
             	    	console.log(http.responseText);
-            	    } else if (http.readyState == 4) {
+            	    } else if (http.readyState == 4 && http.status == 400) {
+            	    	alert("Kész!\nEredmény: " + seconds + " másodperc.\nNem sikerült elmenteni az adatbázisba.");
+            	    	console.log(params);
+            	    	console.log(http.responseText);
+                	} else if (http.readyState == 4) {
             	    	alert("Kész!\nEredmény: " + seconds + " másodperc.");
                 	}
             	}

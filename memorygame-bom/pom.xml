@@ -13,6 +13,7 @@
 		<version.memorygame-common-types>0.0.1-SNAPSHOT</version.memorygame-common-types>
 		<version.memorygame-common-entities>0.0.1-SNAPSHOT</version.memorygame-common-entities>
 		<version.memorygame-common-security>0.0.1-SNAPSHOT</version.memorygame-common-security>
+		<version.memorygame-common-jaxutils>0.0.1-SNAPSHOT</version.memorygame-common-jaxutils>
 		<version.memorygame-common-exception>0.0.1-SNAPSHOT</version.memorygame-common-exception>
 		<version.memorygame-common-transaction>0.0.1-SNAPSHOT</version.memorygame-common-transaction>
 		<version.memorygame>0.0.1-SNAPSHOT</version.memorygame>
@@ -60,6 +61,13 @@
 				<groupId>hu.icell</groupId>
 				<artifactId>memorygame-common-security</artifactId>
 				<version>${version.memorygame-common-security}</version>
+			</dependency>
+            
+            <!-- memorygame-common-jaxutils -->
+			<dependency>
+				<groupId>hu.icell</groupId>
+				<artifactId>memorygame-common-jaxutils</artifactId>
+				<version>${version.memorygame-common-jaxutils}</version>
 			</dependency>
 
 			<!-- memorygame-common-exception -->
