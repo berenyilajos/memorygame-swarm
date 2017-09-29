@@ -2,25 +2,6 @@ package hu.icell.common.logger;
 
 import javax.enterprise.context.Dependent;
 
-//import javax.enterprise.inject.Produces;
-//
-//import org.slf4j.Logger;
-//
-//import hu.icell.common.annotation.ThisLogger;
-//
-//@ThisLogger
-//public class LoggerProducer {
-//    
-//    @ThisLogger
-//    private Logger log;
-//    
-//    @Produces
-//    public Logger createLogger() {
-//        return log;
-//    }
-//
-//}
-
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.inject.Inject;
