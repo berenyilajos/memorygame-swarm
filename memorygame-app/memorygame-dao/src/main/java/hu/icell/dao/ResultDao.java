@@ -12,6 +12,8 @@ import javax.persistence.Query;
 
 //import org.apache.deltaspike.jpa.api.transaction.Transactional;
 
+import hu.icell.common.logger.AppLogger;
+import hu.icell.common.logger.ThisLogger;
 import hu.icell.entities.Result;
 import hu.icell.entities.User;
 import hu.icell.exception.MyApplicationException;
@@ -20,31 +22,41 @@ import hu.icell.exception.MyApplicationException;
 public class ResultDao {
     
     @Inject
+    @ThisLogger
+    private AppLogger log;
+    
+    @Inject
     private EntityManager em;
     
     public static final int MIN_SECONDS = 10;
     public static final String LESS_SECONDS_MESSAGE = "Seconds értéke nem lehet " + MIN_SECONDS + "-nél kevesebb!";
     
     public List<Result> getResults() {
+        log.debug("ResultDao.getResults >>>");
         Query q = em.createQuery("SELECT r FROM Result r JOIN FETCH r.user u ORDER BY r.seconds ASC, r.resultDate DESC");
         q.setMaxResults(20);
         List<Result> list = q.getResultList();
-        
+        log.debug("<<< ResultDao.getResults");
+    
         return list;
     }
     
     public List<Result> getResultsByUser(User user) {
+        log.debug("ResultDao.getResultsByUser, userName=[{}] >>>", user.getUsername());
         Query q = em.createQuery("SELECT r FROM Result r JOIN FETCH r.user u WHERE u=:user ORDER BY r.seconds ASC, r.resultDate DESC");
         q.setParameter("user", user);
         q.setMaxResults(20);
         List<Result> list = q.getResultList();
-        
+        log.debug("<<< ResultDao.getResultsByUser");
+    
         return list;
     }
     
 //    @Transactional
     public void saveResult(int seconds, long userId) throws MyApplicationException {
+        log.debug("ResultDao.saveResult, seconds=[{}], userId=[{}] >>>", seconds, userId);
         if (seconds < MIN_SECONDS) {
+            log.warn(LESS_SECONDS_MESSAGE);
             throw new MyApplicationException(LESS_SECONDS_MESSAGE);
         }
         try {
@@ -54,8 +66,10 @@ public class ResultDao {
             r.setUser(em.find(User.class, userId));
             em.persist(r);
         } catch (Exception e) {
+            log.warn(e.getMessage(), e);
             throw new MyApplicationException(e.getMessage());
         }
+        log.debug("<<< ResultDao.saveResult");
     }
 
 }
