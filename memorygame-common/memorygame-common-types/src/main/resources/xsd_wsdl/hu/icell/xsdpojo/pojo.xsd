@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="http://xsdpojo.icell.hu/common" xmlns="http://icell.hu/xsdpojo" targetNamespace="http://icell.hu/xsdpojo" elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xs:import namespace="http://xsdpojo.icell.hu/common" schemaLocation="common/common.xsd"/>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="http://common.xsdpojo.icell.hu/common" xmlns="http://xsdpojo.icell.hu/pojo" targetNamespace="http://xsdpojo.icell.hu/pojo" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://common.xsdpojo.icell.hu/common" schemaLocation="common/common.xsd"/>
 	<xs:annotation>
 		<xs:documentation>
 		Pojo types

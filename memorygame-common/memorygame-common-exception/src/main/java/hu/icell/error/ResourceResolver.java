@@ -39,7 +39,7 @@ public final class ResourceResolver implements LSResourceResolver {
     
     public LSInput resolveResource(String type, String namespaceURI, String publicId, String systemId, String baseURI) {
         final LSInput input = new DOMInputImpl();
-        ////log.debug("systemId={}", systemId);
+        log.debug("type={}, nameSpaceURI={}, publicId={}, systemId={}, baseURI={}", type, namespaceURI, publicId, systemId, baseURI);
         if( systemId == null ) {
             systemId = "";
         }

@@ -5,8 +5,8 @@ import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
-import hu.icell.xsdpojo.ResultResponse;
-import hu.icell.xsdpojo.common.SuccessType;
+import hu.icell.xsdpojo.pojo.ResultResponse;
+import hu.icell.xsdpojo.common.common.SuccessType;
  
 @Provider
 public class MyApplicationExceptionHandler implements ExceptionMapper<MyApplicationException> {

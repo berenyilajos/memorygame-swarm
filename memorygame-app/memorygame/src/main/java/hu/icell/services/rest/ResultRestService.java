@@ -16,9 +16,9 @@ import hu.icell.common.logger.ThisLogger;
 import hu.icell.entities.User;
 import hu.icell.exception.MyApplicationException;
 import hu.icell.services.BaseService;
-import hu.icell.xsdpojo.ResultResponse;
-import hu.icell.xsdpojo.ResultRequest;
-import hu.icell.xsdpojo.common.SuccessType;
+import hu.icell.xsdpojo.pojo.ResultResponse;
+import hu.icell.xsdpojo.pojo.ResultRequest;
+import hu.icell.xsdpojo.common.common.SuccessType;
 
 @Path("/result")
 public class ResultRestService extends BaseService {
