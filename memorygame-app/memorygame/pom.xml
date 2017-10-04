@@ -91,7 +91,6 @@
 			<plugin>
 				<groupId>com.sun.jersey.contribs</groupId>
 				<artifactId>maven-wadl-plugin</artifactId>
-				<version>1.19.4</version>
 				<dependencies>
 					<dependency>
 						<groupId>hu.icell</groupId>
