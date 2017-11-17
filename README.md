@@ -8,8 +8,8 @@ Adatbázis:
 Oracle 10 XE (de 11-es adatbázis is megteszi)
 
 A projektben levő com.oracle.ojdbc6 dependency-ről:
-Ez privát nexus repóból való, ha ilyened nincsen, akkor a memorygame-common-entities (ebben csak a Hibernate-es entity generálás táblából miatt van)
-és a memorygame projektek pom.xml-jeiből ki kell venni az ojdbc6 dependecy-ket és helyette ezekbe a projektekbe kell egy-egy ojdbc6.jar-t importálni.
+Ez local maven repóból való, vagyis a projektben található (a memorygame-swarm mappában).
+A memorygame (webapp) projektben van, nemcsak a WAR, de a JAR file generálásához is szükséges.
 
 A memorygame-common-entities projekt pom.xml-jében levő com.oracle.ojdbc6 dependency (ami provided), csak az esetleges Hibernate create entities from tables, vagy a HQL editorhoz kell, vagyis a program futtatásához nem.
 
