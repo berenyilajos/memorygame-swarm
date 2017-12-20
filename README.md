@@ -23,7 +23,7 @@ de pl. az Oracle 10 Xe böngészős adatbáziskezelőjében (apex) a "/" jelekke
 Utána az alapadatokat a csv (először a users, majd a result) file-okból importáljuk,
 vagy a usereket regisztráció útján is létre lehet hozni. **/
 
-Utána a memorygame mappában mvn wildfly-swarm:package.
+Utána a memorygame mappában "mvn wildfly-swarm:package".
 Ezután a memorygame/target mappából futtatható a java -jar memorygame-swarm.jar paranccsal.
 
 Ezután az oldal elérhető a localhost:8484/memorygame url-en.

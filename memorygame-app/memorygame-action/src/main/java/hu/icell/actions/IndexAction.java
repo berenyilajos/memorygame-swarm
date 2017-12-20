@@ -2,7 +2,9 @@ package hu.icell.actions;
 
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
-import javax.transaction.Transactional;
+//import javax.transaction.Transactional;
+
+import org.apache.deltaspike.jpa.api.transaction.Transactional;
 
 import hu.icell.dao.AuthDao;
 import hu.icell.entities.User;

@@ -8,6 +8,7 @@ import javax.persistence.Query;
 
 import hu.icell.common.logger.AppLogger;
 import hu.icell.common.logger.ThisLogger;
+import hu.icell.dao.repositories.UserRepository;
 import hu.icell.encrypt.Encrypter;
 import hu.icell.entities.User;
 import hu.icell.exception.UserAllreadyExistException;
@@ -22,19 +23,28 @@ public class AuthDao {
     @Inject
     private EntityManager em;
     
+    @Inject
+    private UserRepository userRepository;
+    
     public User getUserByUsernameAndPassword(String username, String password) {
-        log.debug("AuthDao.getUserByUsernameAndPassword, username=[{}] >>>", username);
+        log.debug("AuthDao.getUserByUsernameAndPassword, username=[{}], password[{}] >>>", username, Encrypter.getMD5(password));
         User user = null;
         try{
-            Query q = em.createQuery("SELECT u FROM User u WHERE u.username=:username AND u.password=:password");
-            q.setParameter("username", username);
-            q.setParameter("password", Encrypter.getMD5(password));
-            user = (User) q.getSingleResult();
+            user = userRepository.findByUsernameAndPassword(username, Encrypter.getMD5(password));
         } catch (NoResultException nre) {
             log.warn(nre.getMessage(), nre);
             // return null
         }
-        log.debug("<<< AuthDao.getUserByUsernameAndPassword");
+//        try{
+//            Query q = em.createQuery("SELECT u FROM User u WHERE u.username=:username AND u.password=:password");
+//            q.setParameter("username", username);
+//            q.setParameter("password", Encrypter.getMD5(password));
+//            user = (User) q.getSingleResult();
+//        } catch (NoResultException nre) {
+//            log.warn(nre.getMessage(), nre);
+//            // return null
+//        }
+//        log.debug("<<< AuthDao.getUserByUsernameAndPassword");
         return user;
     }
     
@@ -42,13 +52,19 @@ public class AuthDao {
         log.debug("AuthDao.getUserByUsername, username=[{}] >>>", username);
         User user = null;
         try {
-            Query q = em.createNamedQuery("User.findByUsername");
-            q.setParameter("username", username);
-            user = (User) q.getSingleResult();
+            user = userRepository.findByUsername(username);
         } catch (NoResultException nre) {
             log.warn(nre.getMessage(), nre);
          // return null
         }
+//        try {
+//            Query q = em.createNamedQuery("User.findByUsername");
+//            q.setParameter("username", username);
+//            user = (User) q.getSingleResult();
+//        } catch (NoResultException nre) {
+//            log.warn(nre.getMessage(), nre);
+//         // return null
+//        }
         log.debug("<<< AuthDao.getUserByUsername");
         return user;
     }
@@ -64,7 +80,8 @@ public class AuthDao {
         user.setUsername(username);
         user.setPassword(Encrypter.getMD5(password));
         user.setEmail(username + "@example.com");
-        em.persist(user);
+//        em.persist(user);
+        userRepository.save(user);
         log.debug("<<< AuthDao.saveUser");
     }
 
