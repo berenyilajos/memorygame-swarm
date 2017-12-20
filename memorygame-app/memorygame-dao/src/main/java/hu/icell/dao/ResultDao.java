@@ -7,8 +7,6 @@ import java.util.List;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
-//import javax.transaction.Transactional;
 
 //import org.apache.deltaspike.jpa.api.transaction.Transactional;
 
@@ -44,7 +42,8 @@ public class ResultDao {
 //        Query q = em.createQuery("SELECT r FROM Result r JOIN FETCH r.user u ORDER BY r.seconds ASC, r.resultDate DESC");
 //        q.setMaxResults(20);
 //        List<Result> list = q.getResultList();
-        List<Result> list = resultRepository.getResults();
+//        List<Result> list = resultRepository.getResults();
+        List<Result> list = resultRepository.getResultsEm();
         log.debug("<<< ResultDao.getResults");
     
         return list;
