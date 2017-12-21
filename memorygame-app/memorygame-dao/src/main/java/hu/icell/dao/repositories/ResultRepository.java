@@ -34,7 +34,7 @@ public abstract class ResultRepository implements EntityRepository<Result, Long>
 
     public List<Result> getResultsEm() {
         log.debug("ResultRepository.getResultsEm >>>");
-        TypedQuery q = em.createQuery("SELECT r FROM Result r JOIN FETCH r.user u ORDER BY r.seconds ASC, r.resultDate DESC", Result.class);
+        TypedQuery<Result> q = em.createQuery("SELECT r FROM Result r JOIN FETCH r.user u ORDER BY r.seconds ASC, r.resultDate DESC", Result.class);
         q.setMaxResults(20);
         List<Result> list = q.getResultList();
         log.debug("<<< ResultRepository.getResultsEm");
