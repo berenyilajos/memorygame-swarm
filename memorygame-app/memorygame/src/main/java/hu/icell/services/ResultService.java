@@ -59,7 +59,8 @@ public class ResultService {
             return;
         }
         
-        List<Result> list = resultAction.getResults();
+//        List<Result> list = resultAction.getResults();
+        List<Result> list = resultAction.getResultsData();
 //      em.getTransaction().commit();
         
         request.setAttribute("list", list);

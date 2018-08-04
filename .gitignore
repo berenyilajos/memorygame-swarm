@@ -5,6 +5,7 @@ target/
 *.class
 .classpath
 .project
+.tern-project
 *.iml
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/

@@ -22,6 +22,10 @@ public class ResultAction {
         return resultDao.getResults();
     }
     
+    public List<Result> getResultsData() {
+      return resultDao.getResultsData();
+  }
+    
     public List<Result> getResultsByUser(User user) {
         return resultDao.getResultsByUser(user);
     }
