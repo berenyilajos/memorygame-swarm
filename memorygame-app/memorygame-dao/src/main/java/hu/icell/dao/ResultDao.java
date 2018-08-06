@@ -64,12 +64,12 @@ public class ResultDao {
         List<Result> list = new ArrayList<Result>();
         for (ResultDatabean bean : dataList) {
             User u = new User();
-            u.setId(bean.getUserId().longValue());
+            u.setId(bean.getUserId());
             u.setEmail(bean.getEmail());
             u.setPassword(bean.getPassword());
             u.setUsername(bean.getUsername());
             Result r = new Result();
-            r.setId(bean.getResultId().longValue());
+            r.setId(bean.getResultId());
             r.setResultDate(bean.getResultDate());
             r.setSeconds(bean.getSeconds());
             r.setUser(u);

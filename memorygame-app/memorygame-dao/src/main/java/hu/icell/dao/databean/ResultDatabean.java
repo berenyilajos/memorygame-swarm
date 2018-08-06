@@ -4,31 +4,31 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class ResultDatabean {
-    private BigDecimal userId;
+    private long userId;
     private String username;
     private String email;
     private String password;
 
-    private BigDecimal resultId;
+    private long resultId;
     private Date resultDate;
     private BigDecimal seconds;
 
     public ResultDatabean(BigDecimal userId, String username, String email, String password, BigDecimal resultId, java.sql.Timestamp resultDate, BigDecimal seconds) {
         super();
-        this.userId = userId;
+        this.userId = userId.longValue();
         this.username = username;
         this.email = email;
         this.password = password;
-        this.resultId = resultId;
+        this.resultId = resultId.longValue();
         this.resultDate = new Date(resultDate.getTime());
         this.seconds = seconds;
     }
 
-    public BigDecimal getUserId() {
+    public long getUserId() {
         return userId;
     }
 
-    public void setUserId(BigDecimal userId) {
+    public void setUserId(long userId) {
         this.userId = userId;
     }
 
@@ -56,11 +56,11 @@ public class ResultDatabean {
         this.password = password;
     }
 
-    public BigDecimal getResultId() {
+    public long getResultId() {
         return resultId;
     }
 
-    public void setResultId(BigDecimal resultId) {
+    public void setResultId(long resultId) {
         this.resultId = resultId;
     }
 
