@@ -15,6 +15,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.assertj.core.api.Assertions;
 
 import hu.icell.dao.AuthDao;
 import hu.icell.entities.User;
@@ -66,12 +67,13 @@ public class IndexActionTest {
         assertEquals(null, user);
     }
 
-    @Test(expected=UserAllreadyExistException.class)
+    @Test
     public void testSaveUser() throws UserAllreadyExistException {
-        underTest.saveUser(usernameExist, password);
-        verify(authDao, times(1)).saveUser(usernameExist, password);
         underTest.saveUser(usernameNotExist, password);
-        fail("Should not be called!");
+        verify(authDao, times(1)).saveUser(usernameNotExist, password);
+        Assertions.assertThatExceptionOfType(UserAllreadyExistException.class)
+                .isThrownBy(() ->  underTest.saveUser(usernameExist, password))
+                .withMessage(UserAllreadyExistException.USER_ALLREADY_EXISTS);
     }
     
     @Rule
