@@ -1,6 +1,8 @@
 package hu.icell.actions;
 
+import static org.hamcrest.CoreMatchers.startsWith;
 import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -13,6 +15,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.assertj.core.api.Assertions;
@@ -57,6 +60,7 @@ public class IndexActionTest {
         assertEquals(testUser, user);
         user = underTest.getUserByUsername(usernameNotExist);
         assertEquals(null, user);
+        verify(authDao, times(2)).getUserByUsername(Matchers.startsWith("l"));
     }
 
     @Test
@@ -65,6 +69,7 @@ public class IndexActionTest {
         assertEquals(testUser, user);
         user = underTest.getUserByUsernameAndPassword(usernameNotExist, wrongPassword);
         assertEquals(null, user);
+        verify(authDao, times(2)).getUserByUsernameAndPassword(Matchers.startsWith("l"), Matchers.anyString());
     }
 
     @Test
@@ -74,6 +79,11 @@ public class IndexActionTest {
         Assertions.assertThatExceptionOfType(UserAllreadyExistException.class)
                 .isThrownBy(() ->  underTest.saveUser(usernameExist, password))
                 .withMessage(UserAllreadyExistException.USER_ALLREADY_EXISTS);
+        assertThat(assertThrows(UserAllreadyExistException.class, () -> underTest.saveUser(usernameExist, password)).getMessage(),
+                startsWith(UserAllreadyExistException.USER_ALLREADY_EXISTS));
+        assertEquals(assertThrows(UserAllreadyExistException.class, () -> underTest.saveUser(usernameExist, password)).getMessage(),
+                UserAllreadyExistException.USER_ALLREADY_EXISTS);
+
     }
     
     @Rule

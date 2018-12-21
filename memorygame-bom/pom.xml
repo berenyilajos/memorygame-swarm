@@ -31,6 +31,7 @@
 		<version.javax.enterprise.cdi-api>2.0-PFD2</version.javax.enterprise.cdi-api>
 		<version.org.quartz-scheduler.quartz>2.3.0</version.org.quartz-scheduler.quartz>
 		<version.junit.junit>4.12</version.junit.junit>
+		<version.junit-jupiter-api>5.3.2</version.junit-jupiter-api>
 		<version.assertj-core>3.4.0</version.assertj-core>
 		<version.org.mockito.mockito-all>1.10.19</version.org.mockito.mockito-all>
 		<version.com.fasterxml.jackson.core.jackson-core>2.8.9</version.com.fasterxml.jackson.core.jackson-core>
@@ -267,6 +268,13 @@
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
 				<version>${version.junit.junit}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter-api</artifactId>
+				<version>${version.junit-jupiter-api}</version>
 				<scope>test</scope>
 			</dependency>
 
