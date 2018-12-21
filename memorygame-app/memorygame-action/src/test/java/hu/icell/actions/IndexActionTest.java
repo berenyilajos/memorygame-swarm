@@ -59,7 +59,7 @@ public class IndexActionTest {
         User user = underTest.getUserByUsername(usernameExist);
         assertEquals(testUser, user);
         user = underTest.getUserByUsername(usernameNotExist);
-        assertEquals(null, user);
+        assertNull(user);
         verify(authDao, times(2)).getUserByUsername(Matchers.startsWith("l"));
     }
 
@@ -68,7 +68,7 @@ public class IndexActionTest {
         User user = underTest.getUserByUsernameAndPassword(usernameExist, password);
         assertEquals(testUser, user);
         user = underTest.getUserByUsernameAndPassword(usernameNotExist, wrongPassword);
-        assertEquals(null, user);
+        assertNull(user);
         verify(authDao, times(2)).getUserByUsernameAndPassword(Matchers.startsWith("l"), Matchers.anyString());
     }
 
