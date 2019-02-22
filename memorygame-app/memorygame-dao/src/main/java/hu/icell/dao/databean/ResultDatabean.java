@@ -11,7 +11,7 @@ public class ResultDatabean {
 
     private long resultId;
     private Date resultDate;
-    private BigDecimal seconds;
+    private long seconds;
 
     public ResultDatabean(BigDecimal userId, String username, String email, String password, BigDecimal resultId, java.sql.Timestamp resultDate, BigDecimal seconds) {
         super();
@@ -21,7 +21,7 @@ public class ResultDatabean {
         this.password = password;
         this.resultId = resultId.longValue();
         this.resultDate = new Date(resultDate.getTime());
-        this.seconds = seconds;
+        this.seconds = seconds.longValue();
     }
 
     public long getUserId() {
@@ -72,11 +72,11 @@ public class ResultDatabean {
         this.resultDate = resultDate;
     }
 
-    public BigDecimal getSeconds() {
+    public long getSeconds() {
         return seconds;
     }
 
-    public void setSeconds(BigDecimal seconds) {
+    public void setSeconds(long seconds) {
         this.seconds = seconds;
     }
 

@@ -124,7 +124,7 @@ public class ResultDao {
         try {
             Result r = new Result();
             r.setResultDate(Calendar.getInstance().getTime());
-            r.setSeconds(BigDecimal.valueOf(seconds));
+            r.setSeconds(seconds);
             r.setUser(userRepository.findBy(userId));
             // em.persist(r);
             resultRepository.save(r);

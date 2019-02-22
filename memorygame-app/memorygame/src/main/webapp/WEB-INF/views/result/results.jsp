@@ -33,9 +33,9 @@
 			<%
 			}
 			out.println("</table>");
-		} else {
-			out.println("LIST: " + list);
-		}
+		}// else {
+		//	out.println("LIST: " + list);
+		//}
 	%>
 </div>
 </body>
