@@ -3,7 +3,7 @@ package hu.icell.dao.databean;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class ResultDatabean {
+public class ResultDatabean implements ParameterClassResolver {
     private long userId;
     private String username;
     private String email;
@@ -13,15 +13,18 @@ public class ResultDatabean {
     private Date resultDate;
     private long seconds;
 
+    public ResultDatabean() {
+    }
+
     public ResultDatabean(BigDecimal userId, String username, String email, String password, BigDecimal resultId, java.sql.Timestamp resultDate, BigDecimal seconds) {
         super();
-        this.userId = userId.longValue();
+        this.userId = userId != null ? userId.longValue() : 0;
         this.username = username;
         this.email = email;
         this.password = password;
-        this.resultId = resultId.longValue();
-        this.resultDate = new Date(resultDate.getTime());
-        this.seconds = seconds.longValue();
+        this.resultId = resultId != null ? resultId.longValue() : 0;
+        this.resultDate = resultDate != null ? new Date(resultDate.getTime()) : null;
+        this.seconds = seconds != null ? seconds.longValue() : 0;
     }
 
     public long getUserId() {
@@ -80,4 +83,8 @@ public class ResultDatabean {
         this.seconds = seconds;
     }
 
+    @Override
+    public Class[] getClassByParameterIndex() {
+        return new Class[]{BigDecimal.class, String.class, String.class, String.class, BigDecimal.class, java.sql.Timestamp.class, BigDecimal.class};
+    }
 }

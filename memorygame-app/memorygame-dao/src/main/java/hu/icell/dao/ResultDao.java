@@ -15,6 +15,7 @@ import javax.persistence.Query;
 
 import hu.icell.common.logger.AppLogger;
 import hu.icell.common.logger.ThisLogger;
+import hu.icell.dao.databean.ParameterClassResolver;
 import hu.icell.dao.databean.ResultDatabean;
 import hu.icell.dao.repositories.ResultRepository;
 import hu.icell.dao.repositories.UserRepository;
@@ -80,21 +81,17 @@ public class ResultDao {
         return list;
     }
 
-    public static <T> T map(Class<T> type, Object[] tuple) {
-        List<Class<?>> tupleTypes = new ArrayList<Class<?>>();
-        for (Object field : tuple) {
-            tupleTypes.add(field.getClass());
-        }
+    public static <T extends ParameterClassResolver> T map(Class<T> type, Object[] tuple) {
         try {
-            Constructor<T> ctor = type.getConstructor(tupleTypes.toArray(new Class<?>[tuple.length]));
+            Constructor<T> ctor = type.getConstructor(type.getConstructor().newInstance().getClassByParameterIndex());
             return ctor.newInstance(tuple);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static <T> List<T> map(Class<T> type, List<Object[]> records) {
-        List<T> result = new ArrayList<T>();
+    public static <T extends ParameterClassResolver> List<T> map(Class<T> type, List<Object[]> records) {
+        List<T> result = new ArrayList<>(records.size());
         for (Object[] record : records) {
             result.add(map(type, record));
         }
