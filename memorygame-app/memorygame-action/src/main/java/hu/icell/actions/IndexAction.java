@@ -4,6 +4,7 @@ import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 //import javax.transaction.Transactional;
 
+import hu.icell.dao.qualifier.MemorygameDatabase;
 import org.apache.deltaspike.jpa.api.transaction.Transactional;
 
 import hu.icell.dao.AuthDao;
@@ -23,7 +24,7 @@ public class IndexAction {
         return authDao.getUserByUsernameAndPassword(username, password);
     }
     
-    @Transactional
+    @Transactional(qualifier = MemorygameDatabase.class)
     public void saveUser(String username, String password) throws UserAllreadyExistException {
         authDao.saveUser(username, password);
     }

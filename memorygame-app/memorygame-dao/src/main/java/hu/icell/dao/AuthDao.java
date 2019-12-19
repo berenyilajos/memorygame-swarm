@@ -8,6 +8,7 @@ import javax.persistence.Query;
 
 import hu.icell.common.logger.AppLogger;
 import hu.icell.common.logger.ThisLogger;
+import hu.icell.dao.qualifier.MemorygameDatabase;
 import hu.icell.dao.repositories.UserRepository;
 import hu.icell.encrypt.Encrypter;
 import hu.icell.entities.User;
@@ -21,6 +22,7 @@ public class AuthDao {
     private AppLogger log;
     
     @Inject
+    @MemorygameDatabase
     private EntityManager em;
     
     @Inject

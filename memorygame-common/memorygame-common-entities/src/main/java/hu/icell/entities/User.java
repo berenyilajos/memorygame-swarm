@@ -150,4 +150,8 @@ public class User implements Serializable {
         return username;
     }
 
+    public String debugString() {
+        return "username=" + username + ", results=" + results;
+    }
+
 }

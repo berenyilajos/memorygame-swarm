@@ -17,6 +17,7 @@ import hu.icell.common.logger.AppLogger;
 import hu.icell.common.logger.ThisLogger;
 import hu.icell.dao.databean.ParameterClassResolver;
 import hu.icell.dao.databean.ResultDatabean;
+import hu.icell.dao.qualifier.Memorygame2Database;
 import hu.icell.dao.repositories.ResultRepository;
 import hu.icell.dao.repositories.UserRepository;
 import hu.icell.entities.Result;
@@ -31,6 +32,7 @@ public class ResultDao {
     private AppLogger log;
 
     @Inject
+    @Memorygame2Database
     private EntityManager em;
 
     @Inject
@@ -100,18 +102,20 @@ public class ResultDao {
 
     public List<Result> getResultsByUser(User user) {
         log.debug("ResultDao.getResultsByUser, userName=[{}] >>>", user.getUsername());
-        // Query q = em.createQuery("SELECT r FROM Result r JOIN FETCH r.user u
-        // WHERE u=:user ORDER BY r.seconds ASC, r.resultDate DESC");
-        // q.setParameter("user", user);
+        Query q = em.createQuery("SELECT u FROM User u JOIN FETCH u.results r WHERE u.id=:userId AND r.seconds < 90 ORDER BY r.seconds ASC, r.resultDate DESC");
+        q.setParameter("userId", user.getId());
         // q.setMaxResults(20);
-        // List<Result> list = q.getResultList();
+        List<User> rlist = q.getResultList();
+        for (User u : rlist) {
+            log.info("User: " + u.debugString());
+        }
         List<Result> list = resultRepository.getResultsByUser(user);
         log.debug("<<< ResultDao.getResultsByUser");
 
         return list;
     }
 
-    // @Transactional
+    // @Transactional(qualifier = Memorygame2Database.class)
     public void saveResult(int seconds, long userId) throws MyApplicationException {
         log.debug("ResultDao.saveResult, seconds=[{}], userId=[{}] >>>", seconds, userId);
         if (seconds < MIN_SECONDS) {

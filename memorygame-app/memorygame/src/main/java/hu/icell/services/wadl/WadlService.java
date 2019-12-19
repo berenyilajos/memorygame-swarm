@@ -17,6 +17,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.StreamingOutput;
 
+import hu.icell.dao.qualifier.MemorygameDatabase;
 import org.apache.commons.io.IOUtils;
 
 import hu.icell.common.logger.AppLogger;
@@ -30,7 +31,8 @@ import javax.inject.Inject;
 public class WadlService  implements IWadlService {
 	
 	@Inject
-	EntityManager em;
+	@MemorygameDatabase
+	private EntityManager em;
     
     @Inject
     @ThisLogger
