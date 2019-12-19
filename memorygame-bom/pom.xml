@@ -39,7 +39,7 @@
 		<version.assertj-core>3.4.0</version.assertj-core>
 		<version.org.mockito.mockito-all>1.10.19</version.org.mockito.mockito-all>
 		<version.com.fasterxml.jackson.core.jackson-core>2.8.9</version.com.fasterxml.jackson.core.jackson-core>
-		<version.com.fasterxml.jackson.core.jackson-databind>2.8.9</version.com.fasterxml.jackson.core.jackson-databind>
+		<version.com.fasterxml.jackson.core.jackson-databind>2.9.10.1</version.com.fasterxml.jackson.core.jackson-databind>
 		<version.org.jboss.resteasy.resteasy-jaxrs>3.1.2.Final</version.org.jboss.resteasy.resteasy-jaxrs>
 		<version.ch.qos.logback.logback-classic>1.2.3</version.ch.qos.logback.logback-classic>
 		<version.com.oracle.ojdbc6>11.2.03</version.com.oracle.ojdbc6>
