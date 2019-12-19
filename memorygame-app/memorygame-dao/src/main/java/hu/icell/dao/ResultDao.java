@@ -102,13 +102,13 @@ public class ResultDao {
 
     public List<Result> getResultsByUser(User user) {
         log.debug("ResultDao.getResultsByUser, userName=[{}] >>>", user.getUsername());
-        Query q = em.createQuery("SELECT u FROM User u JOIN FETCH u.results r WHERE u.id=:userId AND r.seconds < 90 ORDER BY r.seconds ASC, r.resultDate DESC");
-        q.setParameter("userId", user.getId());
-        // q.setMaxResults(20);
-        List<User> rlist = q.getResultList();
-        for (User u : rlist) {
-            log.info("User: " + u.debugString());
-        }
+//        Query q = em.createQuery("SELECT u FROM User u JOIN FETCH u.results r WHERE u.id=:userId AND r.seconds < 90 ORDER BY r.seconds ASC, r.resultDate DESC");
+//        q.setParameter("userId", user.getId());
+//        // q.setMaxResults(20);
+//        List<User> rlist = q.getResultList();
+//        for (User u : rlist) {
+//            log.info("User: " + u.debugString());
+//        }
         List<Result> list = resultRepository.getResultsByUser(user);
         log.debug("<<< ResultDao.getResultsByUser");
 
