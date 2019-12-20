@@ -1,4 +1,6 @@
 ﻿# memorygame-swarm
+## Webes Memória játék
+### Tartalmaz javaee példákat, úgy mint Dependency Injection, JPA, Repository-k (Delta-spike), exception kezelés, quartz, stb.
 
 Rendszerfeltételek:
 
