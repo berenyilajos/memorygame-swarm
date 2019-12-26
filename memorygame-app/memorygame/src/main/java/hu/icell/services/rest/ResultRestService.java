@@ -11,8 +11,10 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import hu.icell.actions.ResultAction;
+import hu.icell.actions.ResultDataAction;
 import hu.icell.common.logger.AppLogger;
 import hu.icell.common.logger.ThisLogger;
+import hu.icell.entities.ResultData;
 import hu.icell.entities.User;
 import hu.icell.exception.MyApplicationException;
 import hu.icell.services.BaseService;
@@ -20,10 +22,15 @@ import hu.icell.xsdpojo.pojo.ResultResponse;
 import hu.icell.xsdpojo.pojo.ResultRequest;
 import hu.icell.xsdpojo.common.common.SuccessType;
 
+import java.util.List;
+
 @Path("/result")
 public class ResultRestService extends BaseService {
     @Inject
     private ResultAction resultAction;
+
+    @Inject
+    private ResultDataAction resultDataAction;
     
     @Inject
     @ThisLogger
@@ -63,6 +70,11 @@ public class ResultRestService extends BaseService {
             return resultResponse;
         }
         resultAction.saveResult(seconds, userId);
+        resultDataAction.saveResultData(seconds, userId);
+        List<ResultData> resultDatas = resultDataAction.getResultsDatas();
+        log.info("ResultDatas: " + resultDatas);
+        resultDatas = resultDataAction.getResults();
+        log.info("ResultDatas by repository: " + resultDatas);
         resultResponse.setSuccess(SuccessType.SUCCESS);
         resultResponse.setUserId(userId);
         //validateByXSD(resultResponse, XSD_POJO);

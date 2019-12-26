@@ -165,6 +165,7 @@
                 <version>${liquibase-maven-plugin.version}</version>
                 <configuration>                  
 					<propertyFile>liquibase-ods.properties</propertyFile>
+					<propertyFile>liquibase-ods-data.properties</propertyFile>
 				</configuration>
 				<executions>
 					<execution>
@@ -231,6 +232,7 @@
 						<artifactId>liquibase-maven-plugin</artifactId>
 						<configuration>                  
 							<propertyFile>liquibase-ods.properties</propertyFile>
+							<propertyFile>liquibase-ods-data.properties</propertyFile>
 						</configuration>
 						<executions>
 							<execution>
@@ -253,6 +255,7 @@
 						<artifactId>liquibase-maven-plugin</artifactId>
                         <configuration>                  
 							<propertyFile>liquibase-ods.properties</propertyFile>
+							<propertyFile>liquibase-ods-data.properties</propertyFile>
 						</configuration>
 						<executions>
 							<execution>

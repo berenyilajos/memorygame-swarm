@@ -3,8 +3,10 @@
 	<persistence-unit name="memorygame" transaction-type="JTA">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<jta-data-source>java:/MemoryGameDS</jta-data-source>
-		
-		
+
+        <class>hu.icell.entities.User</class>
+        <class>hu.icell.entities.Result</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
 		
         <!-- optimalizacio - @Cacheable annotacio ignaralasa (nem hasznaljuk) -->
         <shared-cache-mode>NONE</shared-cache-mode>
@@ -26,7 +28,32 @@
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <jta-data-source>java:/MemoryGameDS</jta-data-source>
 
+        <class>hu.icell.entities.User</class>
+        <class>hu.icell.entities.Result</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
 
+        <!-- optimalizacio - @Cacheable annotacio ignaralasa (nem hasznaljuk) -->
+        <shared-cache-mode>NONE</shared-cache-mode>
+        <!-- optimalizacio - Hibernate Validator kikapcsolasa (nem hasznaljuk) -->
+        <validation-mode>NONE</validation-mode>
+
+        <properties>
+            <property name="hibernate.hbm2ddl.auto" value="none"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.transaction.manager_lookup_class" value="org.hibernate.transaction.JBossTransactionManagerLookup" />
+            <property name="hibernate.connection.release_mode" value="auto"/>
+
+            <property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.JBossAppServerJtaPlatform" />
+
+        </properties>
+    </persistence-unit>
+    <persistence-unit name="memorygame3" transaction-type="JTA">
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <jta-data-source>java:/MemoryGameDataDS</jta-data-source>
+
+        <class>hu.icell.entities.ResultData</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
 
         <!-- optimalizacio - @Cacheable annotacio ignaralasa (nem hasznaljuk) -->
         <shared-cache-mode>NONE</shared-cache-mode>

@@ -32,6 +32,23 @@ swarm:
                 blocking-timeout-wait-millis: 5000
                 idle-timeout-minutes: 1
                 share-prepared-statements: false
+            MemoryGameDataDS:
+                driver-name: oracle
+                connection-url: jdbc:oracle:thin:@//localhost:1521/xe
+                jndi-name: java:/MemoryGameDataDS
+                user-name: MGD
+                password: mgd
+                min-pool-size: 1
+                max-pool-size: 20
+                check-valid-connection-sql: select ISVALIDSESSION from dual
+                valid-connection-checker-class-name: org.jboss.jca.adapters.jdbc.extensions.oracle.OracleValidConnectionChecker
+                validate-on-match: 1
+                background-validation: false
+                stale-connection-checker-class-name: org.jboss.jca.adapters.jdbc.extensions.oracle.OracleValidConnectionChecker
+                exception-sorter-class-name: org.jboss.jca.adapters.jdbc.extensions.oracle.OracleExceptionSorter
+                blocking-timeout-wait-millis: 5000
+                idle-timeout-minutes: 1
+                share-prepared-statements: false
     undertow:
         servlet-containers:
             default:

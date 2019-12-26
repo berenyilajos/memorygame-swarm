@@ -1,6 +1,7 @@
 package hu.icell.dao.jpa;
 
 import hu.icell.dao.qualifier.Memorygame2Database;
+import hu.icell.dao.qualifier.Memorygame3Database;
 import hu.icell.dao.qualifier.MemorygameDatabase;
 
 import javax.enterprise.inject.Model;
@@ -24,6 +25,9 @@ public class EntityManagerProducer {
     @PersistenceContext(unitName="memorygame2")
     private EntityManager entityManager2;
 
+    @PersistenceContext(unitName="memorygame3")
+    private EntityManager entityManager3;
+
     @Produces
     @MemorygameDatabase
     protected EntityManager createEntityManager() {
@@ -40,5 +44,14 @@ public class EntityManagerProducer {
 //            entityManager = emf.createEntityManager();
 //        }
         return entityManager2;
+    }
+
+    @Produces
+    @Memorygame3Database
+    protected EntityManager createEntityManager3() {
+//        if (entityManager == null) {
+//            entityManager = emf.createEntityManager();
+//        }
+        return entityManager3;
     }
 }
