@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>hu.icell</groupId>
@@ -19,7 +18,7 @@
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
-		<wildfly.swarm.version>2017.7.0</wildfly.swarm.version>
+		<wildfly.swarm.version>2.3.0.Final</wildfly.swarm.version>
 		<maven-war-plugin.version>3.1.0</maven-war-plugin.version>
 		<maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
         <liquibase-maven-plugin.version>3.5.3</liquibase-maven-plugin.version>
@@ -80,22 +79,22 @@
 		</dependency>
 		<!-- Wildfly Swarm dependencies -->
 		<dependency>
-		   <groupId>org.wildfly.swarm</groupId>
+		   <groupId>io.thorntail</groupId>
 		   <artifactId>jpa</artifactId>
 		   <version>${wildfly.swarm.version}</version>
 		</dependency>
 		<dependency>
-		   <groupId>org.wildfly.swarm</groupId>
+		   <groupId>io.thorntail</groupId>
 		   <artifactId>jaxrs</artifactId>
 		   <version>${wildfly.swarm.version}</version>
 		</dependency>
 		<dependency>
-		   <groupId>org.wildfly.swarm</groupId>
+		   <groupId>io.thorntail</groupId>
 		   <artifactId>cdi</artifactId>
 		   <version>${wildfly.swarm.version}</version>
 		</dependency>
 		<dependency>
-		   <groupId>org.wildfly.swarm</groupId>
+		   <groupId>io.thorntail</groupId>
 		   <artifactId>transactions</artifactId>
 		   <version>${wildfly.swarm.version}</version>
 		</dependency>
@@ -150,8 +149,8 @@
 				</configuration>
 			</plugin>
 			<plugin>
-	            <groupId>org.wildfly.swarm</groupId>
-	            <artifactId>wildfly-swarm-plugin</artifactId>
+	            <groupId>io.thorntail</groupId>
+	            <artifactId>thorntail-maven-plugin</artifactId>
 	            <version>${wildfly.swarm.version}</version>
 	            <configuration>
 			         <properties>
@@ -203,7 +202,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore></ignore>
+										<ignore/>
 									</action>
 								</pluginExecution>
 							</pluginExecutions>
@@ -295,8 +294,8 @@
 			<build>
                 <plugins>
 				    <plugin>
-	                    <groupId>org.wildfly.swarm</groupId>
-	                    <artifactId>wildfly-swarm-plugin</artifactId>
+	                    <groupId>io.thorntail</groupId>
+	                    <artifactId>thorntail-maven-plugin</artifactId>
 	                    <version>${wildfly.swarm.version}</version>
 	                    <configuration>
 			                 <properties>

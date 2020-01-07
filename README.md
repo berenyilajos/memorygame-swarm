@@ -4,7 +4,7 @@
 
 Rendszerfeltételek:
 
-A program 8-as Javával futtatható. Maven: 3.3.9 vagy 3.5.0
+A program 11-es Javával futtatható. Maven: 3.6.0 vagy újabb
 
 Adatbázis:
 Oracle 10 XE (de 11-es adatbázis is megteszi)
@@ -28,8 +28,8 @@ de pl. az Oracle 10 Xe böngészős adatbáziskezelőjében (apex) a "/" jelekke
 Utána az alapadatokat a csv (először a users, majd a result) file-okból importáljuk,
 vagy a usereket regisztráció útján is létre lehet hozni. **/
 
-Utána a memorygame mappában "mvn wildfly-swarm:package".
-Ezután a memorygame/target mappából futtatható a java -jar memorygame-swarm.jar paranccsal.
+Utána a memorygame mappában "mvn thorntail:package".
+Ezután a memorygame/target mappából futtatható a java -jar memorygame-thorntail.jar paranccsal.
 
 Ezután az oldal elérhető a localhost:8484/memorygame url-en.
 
