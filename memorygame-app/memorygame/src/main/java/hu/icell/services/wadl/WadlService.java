@@ -25,8 +25,6 @@ import hu.icell.common.logger.ThisLogger;
 import hu.icell.app.RestApplication;
 import hu.icell.exception.MyApplicationException;
 
-import javax.inject.Inject;
-
 @Model
 public class WadlService  implements IWadlService {
 	
