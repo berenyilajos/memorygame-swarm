@@ -9,7 +9,7 @@ import javax.persistence.TypedQuery;
 import hu.icell.dao.jpa.Memorygame2EntityManagerResolver;
 import hu.icell.dao.qualifier.Memorygame2Database;
 import org.apache.deltaspike.data.api.AbstractEntityRepository;
-import org.apache.deltaspike.data.api.EntityManagerConfig;
+import org.apache.deltaspike.jpa.api.entitymanager.EntityManagerConfig;
 import org.apache.deltaspike.data.api.EntityRepository;
 import org.apache.deltaspike.data.api.Query;
 import org.apache.deltaspike.data.api.QueryParam;

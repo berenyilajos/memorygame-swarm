@@ -1,7 +1,7 @@
 package hu.icell.dao.repositories;
 
 import hu.icell.dao.jpa.MemorygameEntityManagerResolver;
-import org.apache.deltaspike.data.api.EntityManagerConfig;
+import org.apache.deltaspike.jpa.api.entitymanager.EntityManagerConfig;
 import org.apache.deltaspike.data.api.Repository;
 import org.apache.deltaspike.data.api.EntityRepository;
 

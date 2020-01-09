@@ -5,7 +5,7 @@ import hu.icell.common.logger.ThisLogger;
 import hu.icell.dao.jpa.Memorygame3EntityManagerResolver;
 import hu.icell.entities.ResultData;
 import org.apache.deltaspike.data.api.AbstractEntityRepository;
-import org.apache.deltaspike.data.api.EntityManagerConfig;
+import org.apache.deltaspike.jpa.api.entitymanager.EntityManagerConfig;
 import org.apache.deltaspike.data.api.Query;
 import org.apache.deltaspike.data.api.Repository;
 
