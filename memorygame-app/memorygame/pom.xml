@@ -16,9 +16,7 @@
         </repository>
     </repositories>
 	<properties>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
-		<wildfly.swarm.version>2.3.0.Final</wildfly.swarm.version>
+		<wildfly.swarm.version>2.6.0.Final</wildfly.swarm.version>
 		<maven-war-plugin.version>3.1.0</maven-war-plugin.version>
 		<maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
         <liquibase-maven-plugin.version>3.5.3</liquibase-maven-plugin.version>
@@ -45,10 +43,6 @@
 			<artifactId>logback-classic</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.jboss.resteasy</groupId>
-			<artifactId>resteasy-jaxrs</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>
 			<artifactId>hibernate-jpa-2.1-api</artifactId>
 		</dependency>
@@ -60,18 +54,6 @@
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>javax.enterprise</groupId>
-			<artifactId>cdi-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
 		</dependency>
         <dependency>
 			<groupId>commons-io</groupId>
@@ -143,8 +125,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${maven-compiler-plugin.version}</version>
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
+					<source>11</source>
+					<target>11</target>
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
