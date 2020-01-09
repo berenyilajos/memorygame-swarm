@@ -81,4 +81,9 @@ public class ResultRestService extends BaseService {
         log.debug("<<< ResultRestService.saveAction");
         return resultResponse;
     }
+
+    @Override
+    protected AppLogger log() {
+        return log;
+    }
 }

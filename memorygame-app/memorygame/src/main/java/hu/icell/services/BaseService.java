@@ -3,30 +3,18 @@ package hu.icell.services;
 import java.io.InputStream;
 import java.io.StringWriter;
 
-import javax.inject.Inject;
-import javax.inject.Named;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
-
 import hu.icell.common.logger.AppLogger;
-import hu.icell.common.logger.ThisLogger;
 import hu.icell.error.MarshallingUtil;
 import hu.icell.error.MyErrorHandler;
 import hu.icell.error.ValidationErrorCollector;
 
-@Named
-public class BaseService {
-    
-//    private static Logger log = LoggerFactory.getLogger(BaseService.class);
-    @Inject
-    @ThisLogger
-    private AppLogger log;
+public abstract class BaseService {
     
     protected void validateByXSD(Object xmlObject, String xsd) throws Exception {
         StringWriter stringWriter = new StringWriter();
@@ -58,10 +46,10 @@ public class BaseService {
             marshaller.setSchema(schema);
             marshaller.marshal(xmlObject, stringWriter);
             if (errorCollector.getErrors().size() > 0) {
-                log.warn("xml validation error(s) occured!");
-                if (!log.isTraceEnabled()) {
+                log().warn("xml validation error(s) occured!");
+                if (!log().isTraceEnabled()) {
                     String xml = MarshallingUtil.marshall(xmlObject);
-                    log.info("xml content: {} ", new Object[]{(xml == null ? "" : xml)});
+                    log().info("xml content: {} ", new Object[]{(xml == null ? "" : xml)});
                 }
                 Exception ire = new Exception(
                         errorCollector.getErrors().get(0).getError());
@@ -71,5 +59,7 @@ public class BaseService {
             
         }
     }
+
+    protected abstract AppLogger log();
     
 }
