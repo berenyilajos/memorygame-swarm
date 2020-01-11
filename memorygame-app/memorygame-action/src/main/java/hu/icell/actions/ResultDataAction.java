@@ -1,7 +1,6 @@
 package hu.icell.actions;
 
 import hu.icell.dao.ResultDataDao;
-import hu.icell.dao.jpa.Memorygame3EntityManagerResolver;
 import hu.icell.dao.qualifier.Memorygame3Database;
 import hu.icell.dao.repositories.ResultDataRepository;
 import hu.icell.entities.ResultData;

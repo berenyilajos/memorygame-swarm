@@ -18,6 +18,8 @@
          <module name="org.slf4j.impl" />
       </exclusions>
       <dependencies>
+         <module name="javax.api"/>
+         <module name="javax.transaction.api"/>
       	 <module name="java.net.http"/>
          <module name="org.apache.commons.io"/>
          <module name="org.codehaus.jackson.jackson-mapper-asl"/>

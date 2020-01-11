@@ -115,7 +115,6 @@ public class ResultDao {
         return list;
     }
 
-    // @Transactional(qualifier = Memorygame2Database.class)
     public void saveResult(int seconds, long userId) throws MyApplicationException {
         log.debug("ResultDao.saveResult, seconds=[{}], userId=[{}] >>>", seconds, userId);
         if (seconds < MIN_SECONDS) {
@@ -126,9 +125,10 @@ public class ResultDao {
             Result r = new Result();
             r.setResultDate(Calendar.getInstance().getTime());
             r.setSeconds(seconds);
-            r.setUser(userRepository.findBy(userId));
-            // em.persist(r);
-            resultRepository.save(r);
+            r.setUser(em.find(User.class, userId));
+//            r.setUser(userRepository.findBy(userId));
+             em.persist(r);
+//            resultRepository.save(r);
         } catch (Exception e) {
             log.warn(e.getMessage(), e);
             throw new MyApplicationException(e.getMessage());

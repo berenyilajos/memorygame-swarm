@@ -14,10 +14,10 @@ swarm:
         host: localhost
         port: 8484
     datasources:
-        data-sources:
+        xa-data-sources:
             MemoryGameDS:
                 driver-name: oracle
-                connection-url: jdbc:oracle:thin:@//localhost:1521/xe
+                xa-datasource-class: oracle.jdbc.xa.client.OracleXADataSource
                 jndi-name: java:/MemoryGameDS
                 user-name: MG
                 password: mg
@@ -32,9 +32,13 @@ swarm:
                 blocking-timeout-wait-millis: 5000
                 idle-timeout-minutes: 1
                 share-prepared-statements: false
+                no-recovery: true
+                xa-datasource-properties:
+                    URL:
+                        value: jdbc:oracle:thin:@localhost:1521:XE
             MemoryGameDataDS:
                 driver-name: oracle
-                connection-url: jdbc:oracle:thin:@//localhost:1521/xe
+                xa-datasource-class: oracle.jdbc.xa.client.OracleXADataSource
                 jndi-name: java:/MemoryGameDataDS
                 user-name: MGD
                 password: mgd
@@ -49,6 +53,10 @@ swarm:
                 blocking-timeout-wait-millis: 5000
                 idle-timeout-minutes: 1
                 share-prepared-statements: false
+                no-recovery: true
+                xa-datasource-properties:
+                    URL:
+                        value: jdbc:oracle:thin:@localhost:1521:XE
     undertow:
         servlet-containers:
             default:
