@@ -34,7 +34,7 @@ public class AuthDao {
         try{
             user = userRepository.findByUsernameAndPassword(username, Encrypter.getMD5(password));
         } catch (NoResultException nre) {
-            log.warn(nre.getMessage(), nre);
+            log.warn("User not found: " + nre.getMessage());
             // return null
         }
 //        try{
@@ -43,7 +43,7 @@ public class AuthDao {
 //            q.setParameter("password", Encrypter.getMD5(password));
 //            user = (User) q.getSingleResult();
 //        } catch (NoResultException nre) {
-//            log.warn(nre.getMessage(), nre);
+//            log.warn("User not found: " + nre.getMessage());
 //            // return null
 //        }
 //        log.debug("<<< AuthDao.getUserByUsernameAndPassword");
@@ -56,7 +56,7 @@ public class AuthDao {
         try {
             user = userRepository.findByUsername(username);
         } catch (NoResultException nre) {
-            log.warn(nre.getMessage(), nre);
+            log.warn("User not found: " + nre.getMessage());
          // return null
         }
 //        try {
@@ -64,7 +64,7 @@ public class AuthDao {
 //            q.setParameter("username", username);
 //            user = (User) q.getSingleResult();
 //        } catch (NoResultException nre) {
-//            log.warn(nre.getMessage(), nre);
+//            log.warn("User not found: " + nre.getMessage());
 //         // return null
 //        }
         log.debug("<<< AuthDao.getUserByUsername");

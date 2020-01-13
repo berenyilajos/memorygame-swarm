@@ -81,6 +81,7 @@ public class ResultActionTest {
         underTest.saveResult(seconds, userId);
         underTest.saveResult(seconds, userId);
         verify(resultDao, times(3)).saveResult(seconds, userId);
+        verify(resultDataDao, times(3)).saveResultData(seconds, userId);
     }
     
     @Rule
