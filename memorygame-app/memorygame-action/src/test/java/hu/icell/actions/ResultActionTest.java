@@ -6,6 +6,7 @@ import static org.mockito.Mockito.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import hu.icell.dao.ResultDataDao;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -29,6 +30,9 @@ public class ResultActionTest {
     
     @Mock
     private ResultDao resultDao;
+
+    @Mock
+    private ResultDataDao resultDataDao;
     
     @Mock
     private Result testResult;

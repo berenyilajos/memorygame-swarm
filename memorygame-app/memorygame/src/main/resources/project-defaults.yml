@@ -21,18 +21,17 @@ swarm:
                 jndi-name: java:/MemoryGameDS
                 user-name: MG
                 password: mg
-                min-pool-size: 1
+                min-pool-size: 10
                 max-pool-size: 20
-                check-valid-connection-sql: select ISVALIDSESSION from dual
                 valid-connection-checker-class-name: org.jboss.jca.adapters.jdbc.extensions.oracle.OracleValidConnectionChecker
-                validate-on-match: 1
+                validate-on-match: true
                 background-validation: false
                 stale-connection-checker-class-name: org.jboss.jca.adapters.jdbc.extensions.oracle.OracleValidConnectionChecker
                 exception-sorter-class-name: org.jboss.jca.adapters.jdbc.extensions.oracle.OracleExceptionSorter
-                blocking-timeout-wait-millis: 5000
-                idle-timeout-minutes: 1
-                share-prepared-statements: false
-                no-recovery: true
+                connectable: true
+                interleaving: true
+                allow-multiple-users: true
+                no-tx-separate-pool: true
                 xa-datasource-properties:
                     URL:
                         value: jdbc:oracle:thin:@localhost:1521:XE
@@ -42,18 +41,17 @@ swarm:
                 jndi-name: java:/MemoryGameDataDS
                 user-name: MGD
                 password: mgd
-                min-pool-size: 1
+                min-pool-size: 10
                 max-pool-size: 20
-                check-valid-connection-sql: select ISVALIDSESSION from dual
                 valid-connection-checker-class-name: org.jboss.jca.adapters.jdbc.extensions.oracle.OracleValidConnectionChecker
-                validate-on-match: 1
+                validate-on-match: true
                 background-validation: false
                 stale-connection-checker-class-name: org.jboss.jca.adapters.jdbc.extensions.oracle.OracleValidConnectionChecker
                 exception-sorter-class-name: org.jboss.jca.adapters.jdbc.extensions.oracle.OracleExceptionSorter
-                blocking-timeout-wait-millis: 5000
-                idle-timeout-minutes: 1
-                share-prepared-statements: false
-                no-recovery: true
+                connectable: true
+                interleaving: true
+                allow-multiple-users: true
+                no-tx-separate-pool: true
                 xa-datasource-properties:
                     URL:
                         value: jdbc:oracle:thin:@localhost:1521:XE

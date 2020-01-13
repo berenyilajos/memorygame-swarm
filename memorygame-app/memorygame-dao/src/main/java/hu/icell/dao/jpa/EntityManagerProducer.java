@@ -4,20 +4,14 @@ import hu.icell.dao.qualifier.Memorygame2Database;
 import hu.icell.dao.qualifier.Memorygame3Database;
 import hu.icell.dao.qualifier.MemorygameDatabase;
 
+import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Model;
 import javax.enterprise.inject.Produces;
 import javax.persistence.EntityManager;
-//import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
-//import javax.persistence.PersistenceUnit;
 
 @Model
 public class EntityManagerProducer {
-
-//    @PersistenceUnit(unitName="memorygame")
-//    EntityManagerFactory emf;
-//    
-//    private EntityManager entityManager = null;
     
     @PersistenceContext(unitName="memorygame")
     private EntityManager entityManager;
@@ -31,27 +25,39 @@ public class EntityManagerProducer {
     @Produces
     @MemorygameDatabase
     protected EntityManager createEntityManager() {
-//        if (entityManager == null) {
-//            entityManager = emf.createEntityManager();
-//        }
         return entityManager;
     }
 
     @Produces
     @Memorygame2Database
     protected EntityManager createEntityManager2() {
-//        if (entityManager == null) {
-//            entityManager = emf.createEntityManager();
-//        }
         return entityManager2;
     }
 
     @Produces
     @Memorygame3Database
     protected EntityManager createEntityManager3() {
-//        if (entityManager == null) {
-//            entityManager = emf.createEntityManager();
-//        }
         return entityManager3;
     }
+
+//    public void close(
+//            @Disposes @MemorygameDatabase EntityManager entityManager) {
+//        if (entityManager.isOpen()) {
+//            entityManager.close();
+//        }
+//    }
+//
+//    public void close2(
+//            @Disposes @Memorygame2Database EntityManager entityManager) {
+//        if (entityManager.isOpen()) {
+//            entityManager.close();
+//        }
+//    }
+//
+//    public void close3(
+//            @Disposes @Memorygame3Database EntityManager entityManager) {
+//        if (entityManager.isOpen()) {
+//            entityManager.close();
+//        }
+//    }
 }

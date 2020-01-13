@@ -70,11 +70,11 @@ public class ResultRestService extends BaseService {
             return resultResponse;
         }
         resultAction.saveResult(seconds, userId);
-        resultDataAction.saveResultData(seconds, userId);
-        List<ResultData> resultDatas = resultDataAction.getResultsDatas();
-        log.info("ResultDatas: " + resultDatas);
-        resultDatas = resultDataAction.getResults();
-        log.info("ResultDatas by repository: " + resultDatas);
+//        resultDataAction.saveResultData(seconds, userId);
+//        List<ResultData> resultDatas = resultDataAction.getResultsDatas();
+//        log.info("ResultDatas: " + resultDatas);
+//        resultDatas = resultDataAction.getResults();
+//        log.info("ResultDatas by repository: " + resultDatas);
         resultResponse.setSuccess(SuccessType.SUCCESS);
         resultResponse.setUserId(userId);
         //validateByXSD(resultResponse, XSD_POJO);
