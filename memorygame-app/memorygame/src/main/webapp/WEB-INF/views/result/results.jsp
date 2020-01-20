@@ -19,6 +19,7 @@
 			<li><a class="active" href="<%= request.getContextPath() %>/game/result">Results</a></li>
 			<li><a href="<%= request.getContextPath() %>/game/result/<%= ((User)request.getSession().getAttribute("user")).getId() %>">My results</a></li>
 			<li class="right" ><a href="<%= request.getContextPath() %>/game/logout">Logout</a></li>
+			<li class="right" ><span><%= ((User)request.getSession().getAttribute("user")).getUsername() %></span></li>
 		</ul>
 	</div>
 	<h3>Results (only 6x6)</h3>
