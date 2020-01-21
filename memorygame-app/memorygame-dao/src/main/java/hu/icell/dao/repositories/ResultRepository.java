@@ -33,10 +33,10 @@ public abstract class ResultRepository extends AbstractEntityRepository<Result, 
 //    @Memorygame2Database
 //    private EntityManager em;
     
-    @Query(value = "SELECT r FROM Result r JOIN FETCH r.user u WHERE u=:user ORDER BY r.seconds ASC, r.resultDate DESC", max = 15)
+    @Query(value = "SELECT r FROM Result r JOIN FETCH r.user u WHERE u=:user ORDER BY r.seconds ASC, r.resultDate DESC", max = 20)
     abstract public List<Result> getResultsByUser(@QueryParam("user") User user);
     
-    @Query(value = "SELECT r FROM Result r JOIN FETCH r.user u ORDER BY r.seconds ASC, r.resultDate DESC", max = 20)
+    @Query(value = "SELECT r FROM Result r JOIN FETCH r.user u ORDER BY r.seconds ASC, r.resultDate DESC", max = 30)
     abstract public List<Result> getResults();
 
     public List<Result> getResultsEm() {
