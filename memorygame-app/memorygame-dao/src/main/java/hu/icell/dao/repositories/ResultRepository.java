@@ -43,7 +43,7 @@ public abstract class ResultRepository extends AbstractEntityRepository<Result, 
         log.debug("ResultRepository.getResultsEm >>>");
 //        TypedQuery<Result> q = em.createQuery("SELECT r FROM Result r JOIN FETCH r.user u ORDER BY r.seconds ASC, r.resultDate DESC", Result.class);
         TypedQuery<Result> q = typedQuery("SELECT r FROM Result r JOIN FETCH r.user u ORDER BY r.seconds ASC, r.resultDate DESC");
-        q.setMaxResults(20);
+        q.setMaxResults(30);
         List<Result> list = q.getResultList();
         log.debug("<<< ResultRepository.getResultsEm");
   
