@@ -61,7 +61,7 @@ public class ResultDao {
         log.debug("ResultDao.getResultsData >>>");
         Query q = em.createNativeQuery("SELECT u.id userId, u.username username, u.email email, u.password password, "
                 + "r.id resultId, r.result_date resultDate, r.seconds seconds FROM RESULT r JOIN USERS u ON r.user_id=u.id ORDER BY seconds ASC, resultDate DESC");
-        q.setMaxResults(20);
+        q.setMaxResults(30);
         List<Object[]> resultList =  q.getResultList();
         List<ResultDatabean> dataList = map(ResultDatabean.class, resultList);
         List<Result> list = new ArrayList<Result>();
