@@ -1,7 +1,7 @@
 package hu.icell.dao.jpa;
 
 import hu.icell.dao.qualifier.MemorygameDatabase;
-import org.apache.deltaspike.data.api.EntityManagerResolver;
+import org.apache.deltaspike.jpa.api.entitymanager.EntityManagerResolver;
 
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
