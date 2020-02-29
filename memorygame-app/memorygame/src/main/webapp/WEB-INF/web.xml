@@ -27,6 +27,19 @@
         <filter-name>LoggerContextFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
+    <servlet>
+        <servlet-name>ValamiServlet</servlet-name>
+        <servlet-class>
+            hu.icell.services.ValamiServlet
+        </servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ValamiServlet</servlet-name>
+        <url-pattern>/ValamiServlet</url-pattern>
+    </servlet-mapping>
+
     <!--  logback -->
 	
 	<!-- <context-param>
