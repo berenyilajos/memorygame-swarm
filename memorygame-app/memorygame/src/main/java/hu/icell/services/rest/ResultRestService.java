@@ -4,16 +4,22 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import hu.icell.actions.IndexAction;
 import hu.icell.actions.ResultAction;
 import hu.icell.actions.ResultDataAction;
 import hu.icell.common.logger.AppLogger;
 import hu.icell.common.logger.ThisLogger;
+import hu.icell.dto.DtoHelper;
+import hu.icell.dto.ResultDTO;
+import hu.icell.entities.Result;
 import hu.icell.entities.ResultData;
 import hu.icell.entities.User;
 import hu.icell.exception.MyApplicationException;
@@ -31,6 +37,9 @@ public class ResultRestService extends BaseService {
 
     @Inject
     private ResultDataAction resultDataAction;
+    
+    @Inject
+	private IndexAction indexAction;
     
     @Inject
     @ThisLogger
@@ -80,6 +89,29 @@ public class ResultRestService extends BaseService {
         //validateByXSD(resultResponse, XSD_POJO);
         log.debug("<<< ResultRestService.saveAction");
         return resultResponse;
+    }
+    
+    @GET
+    @Path("/bestresult")
+    @Produces(MediaType.APPLICATION_JSON)
+    public ResultDTO bestResult(@QueryParam("userName") String userName) throws MyApplicationException {
+    	User user;
+		Result result;
+		try {
+			user = indexAction.getUserByUsername(userName);
+			if (user == null) {
+				throw new Exception("User not found");
+			}
+			List<Result> results = resultAction.getResultsByUser(user);
+			if (results.isEmpty()) {
+				throw new Exception("No result was found, userName: " + user.getUsername());
+			}
+			result = results.get(0);
+		} catch (Exception e) {
+			throw new MyApplicationException(e.getMessage());
+		}
+		
+		return DtoHelper.toDTO(result);
     }
 
     @Override

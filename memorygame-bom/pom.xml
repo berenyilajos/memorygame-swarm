@@ -40,6 +40,7 @@
 		<version.org.mockito.mockito-all>1.10.19</version.org.mockito.mockito-all>
 		<version.com.fasterxml.jackson.core.jackson-core>2.8.9</version.com.fasterxml.jackson.core.jackson-core>
 		<version.com.fasterxml.jackson.core.jackson-databind>2.8.9</version.com.fasterxml.jackson.core.jackson-databind>
+		<version.com.fasterxml.jackson.datatype.jackson-datatype-joda>2.8.9</version.com.fasterxml.jackson.datatype.jackson-datatype-joda>
 		<version.org.jboss.resteasy.resteasy-jaxrs>3.9.3.Final</version.org.jboss.resteasy.resteasy-jaxrs>
 		<version.ch.qos.logback.logback-classic>1.2.3</version.ch.qos.logback.logback-classic>
 		<version.com.oracle.ojdbc6>11.2.03</version.com.oracle.ojdbc6>
@@ -287,6 +288,12 @@
 				<artifactId>jackson-databind</artifactId>
 				<version>${version.com.fasterxml.jackson.core.jackson-databind}</version>
 				<scope>provided</scope>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.fasterxml.jackson.datatype</groupId>
+				<artifactId>jackson-datatype-joda</artifactId>
+				<version>${version.com.fasterxml.jackson.datatype.jackson-datatype-joda}</version>
 			</dependency>
 			
 			<dependency>

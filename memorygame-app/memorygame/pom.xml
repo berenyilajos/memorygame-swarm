@@ -23,6 +23,10 @@
 	</properties>
 	<dependencies>
 		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-joda</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>jstl</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
@@ -98,6 +102,11 @@
 						<artifactId>memorygame-common-types</artifactId>
 						<version>${project.version}</version>
 					</dependency>
+					<dependency>
+						<groupId>hu.icell</groupId>
+						<artifactId>memorygame-common-entities</artifactId>
+						<version>${project.version}</version>
+					</dependency>
                     <dependency>
 						<groupId>hu.icell</groupId>
 						<artifactId>memorygame-common-exception</artifactId>
@@ -108,6 +117,7 @@
 					<baseUri>http://localhost:8484/memorygame/game</baseUri>
 					<packagesResourceConfig>
 						<param>hu.icell.services.rest</param>
+						<param>hu.icell.dto</param>
 						<param>hu.icell.xsdpojo</param>
 					</packagesResourceConfig>
 				</configuration>

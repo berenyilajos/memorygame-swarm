@@ -7,6 +7,7 @@ import hu.icell.common.logger.AppLogger;
 import hu.icell.common.logger.ThisLogger;
 import hu.icell.entities.Result;
 import hu.icell.entities.User;
+import hu.icell.objectmapping.DPSObjectMapperFactory;
 import hu.icell.xsdpojo.common.common.SuccessType;
 import hu.icell.xsdpojo.pojo.ResultResponse;
 
@@ -19,6 +20,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class ValamiServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
 
 	@Inject
 	@ThisLogger
@@ -53,7 +55,7 @@ public class ValamiServlet extends HttpServlet {
 			response.setSuccess(SuccessType.ERROR);
 			response.setMessage(e.getMessage());
 		}
-		ObjectMapper objectMapper = new ObjectMapper();
+		ObjectMapper objectMapper = DPSObjectMapperFactory.createObjectMapper();
 		String jsonString = objectMapper.writeValueAsString(response);
 		System.out.println(jsonString);
 		resp.getWriter().println(jsonString);
