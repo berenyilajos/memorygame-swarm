@@ -2,15 +2,15 @@ package hu.icell.managers.interfaces;
 
 import javax.ejb.Local;
 
-import hu.icell.entities.User;
+import hu.icell.common.dto.UserDTO;
 import hu.icell.exception.UserAllreadyExistException;
 
 @Local
 public interface IndexManagerLocal {
 	
-	User getUserByUsername(String username);
+	UserDTO getUserByUsername(String username);
 	
-	User getUserByUsernameAndPassword(String username, String password);
+	UserDTO getUserByUsernameAndPassword(String username, String password);
 	
 	void saveUser(String username, String password) throws UserAllreadyExistException;
 

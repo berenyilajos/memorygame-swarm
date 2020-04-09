@@ -20,6 +20,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.assertj.core.api.Assertions;
 
+import hu.icell.common.dto.UserDTO;
 import hu.icell.dao.interfaces.AuthDaoLocal;
 import hu.icell.entities.User;
 import hu.icell.exception.UserAllreadyExistException;
@@ -57,8 +58,8 @@ public class IndexManagerEjbTest {
 
     @Test
     public void testGetUserByUsername() {
-        User user = underTest.getUserByUsername(usernameExist);
-        assertEquals(testUser, user);
+        UserDTO user = underTest.getUserByUsername(usernameExist);
+        assertNotNull(user);
         user = underTest.getUserByUsername(usernameNotExist);
         assertNull(user);
         verify(authDao, times(2)).getUserByUsername(Matchers.startsWith("l"));
@@ -66,8 +67,8 @@ public class IndexManagerEjbTest {
 
     @Test
     public void testGetUserByUsernameAndPassword() {
-        User user = underTest.getUserByUsernameAndPassword(usernameExist, password);
-        assertEquals(testUser, user);
+        UserDTO user = underTest.getUserByUsernameAndPassword(usernameExist, password);
+        assertNotNull(user);
         user = underTest.getUserByUsernameAndPassword(usernameNotExist, wrongPassword);
         assertNull(user);
         verify(authDao, times(2)).getUserByUsernameAndPassword(Matchers.startsWith("l"), Matchers.anyString());

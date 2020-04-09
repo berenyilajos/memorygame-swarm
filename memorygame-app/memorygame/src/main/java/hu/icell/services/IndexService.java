@@ -2,7 +2,6 @@ package hu.icell.services;
 
 import java.io.IOException;
 
-import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -20,19 +19,18 @@ import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.lang3.StringUtils;
 
+import hu.icell.common.dto.UserDTO;
 import hu.icell.common.logger.AppLogger;
 import hu.icell.common.logger.ThisLogger;
-import hu.icell.entities.User;
+import hu.icell.ejb.EjbFinder;
+import hu.icell.exception.MyApplicationException;
 import hu.icell.exception.UserAllreadyExistException;
-import hu.icell.managers.interfaces.IndexManagerLocal;
+import hu.icell.managers.interfaces.IndexManagerRemote;
 
 @Stateless
 @LocalBean
 @Path("")
 public class IndexService {
-    
-    @EJB
-    private IndexManagerLocal indexManager;
     
     @Inject
     @ThisLogger
@@ -62,7 +60,7 @@ public class IndexService {
         log.debug("IndexService.loginAction, username=[{}] >>>", username);
         String msg = "";
         if (StringUtils.isNotBlank(username) && StringUtils.isNotBlank(password)) {
-            User user = indexManager.getUserByUsernameAndPassword(username, password);
+            UserDTO user = EjbFinder.getIndexManager().getUserByUsernameAndPassword(username, password);
             if (user == null) {
                 msg = "Hibás felhasználónév vagy jelszó!";
             } else {
@@ -85,7 +83,7 @@ public class IndexService {
     @Path("/logout")
     public void logoutAction(@Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession(false);
-        log.debug("IndexService.logoutAction, username=[{}] >>>", session != null ? (User)session.getAttribute("user") : null);
+        log.debug("IndexService.logoutAction, username=[{}] >>>", session != null ? (UserDTO)session.getAttribute("user") : null);
         if (session != null) {
             session.setAttribute("user", null);
             session = null;
@@ -113,7 +111,7 @@ public class IndexService {
             }
             if (msg.isEmpty()) {
                 try {
-                    indexManager.saveUser(username, password);
+                    EjbFinder.getIndexManager().saveUser(username, password);
                     response.sendRedirect("/memorygame/game/login");
                     return;
                 } catch(UserAllreadyExistException ex) {

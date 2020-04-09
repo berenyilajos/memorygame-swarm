@@ -1,0 +1,80 @@
+org:
+  apache:
+    deltaspike:
+      ProjectStage: Development
+swarm:
+    project:
+        stage: default
+    http:
+        host: localhost
+        port: 8485
+    datasources:
+        xa-data-sources:
+            MemoryGameDS:
+                driver-name: oracle
+                xa-datasource-class: oracle.jdbc.xa.client.OracleXADataSource
+                jndi-name: java:/MemoryGameDS
+                user-name: MG
+                password: mg
+                min-pool-size: 10
+                max-pool-size: 20
+                check-valid-connection-sql: select ISVALIDSESSION from dual
+                valid-connection-checker-class-name: org.jboss.jca.adapters.jdbc.extensions.oracle.OracleValidConnectionChecker
+                validate-on-match: true
+                background-validation: false
+                stale-connection-checker-class-name: org.jboss.jca.adapters.jdbc.extensions.oracle.OracleValidConnectionChecker
+                exception-sorter-class-name: org.jboss.jca.adapters.jdbc.extensions.oracle.OracleExceptionSorter
+                same-rm-override: false
+                no-tx-separate-pool: true
+                no-recovery: true
+                xa-datasource-properties:
+                    URL:
+                        value: jdbc:oracle:thin:@localhost:1521:XE
+            MemoryGameDataDS:
+                driver-name: oracle
+                xa-datasource-class: oracle.jdbc.xa.client.OracleXADataSource
+                jndi-name: java:/MemoryGameDataDS
+                user-name: MGD
+                password: mgd
+                min-pool-size: 10
+                max-pool-size: 20
+                check-valid-connection-sql: select ISVALIDSESSION from dual
+                valid-connection-checker-class-name: org.jboss.jca.adapters.jdbc.extensions.oracle.OracleValidConnectionChecker
+                validate-on-match: true
+                background-validation: false
+                stale-connection-checker-class-name: org.jboss.jca.adapters.jdbc.extensions.oracle.OracleValidConnectionChecker
+                exception-sorter-class-name: org.jboss.jca.adapters.jdbc.extensions.oracle.OracleExceptionSorter
+                blocking-timeout-wait-millis: 5000
+                idle-timeout-minutes: 1
+                share-prepared-statements: false
+                same-rm-override: false
+                no-tx-separate-pool: true
+                no-recovery: true
+                xa-datasource-properties:
+                    URL:
+                        value: jdbc:oracle:thin:@localhost:1521:XE
+    undertow:
+        servlet-containers:
+            default:
+                allow-non-standard-wrappers: true
+    logging:
+        root-logger:
+            level: INFO
+            handlers:
+                - CONSOLE
+                - FILE
+        pattern-formatters:
+            FORMAT:
+                pattern: "%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p [thread:%t] [%c{10}] [sid:%X{extSessionId}] - %s%E%n"
+        console-handlers:
+            CONSOLE:
+                named-formatter: FORMAT
+        periodic-size-rotating-file-handlers:
+            FILE:
+                append: true
+                autoflush: true
+                file:
+                    path: log/memorygame-ejb/memorygame-ejb.log
+                named-formatter: FORMAT
+                rotate-size: 50M
+                suffix: .yyyy-MM-dd

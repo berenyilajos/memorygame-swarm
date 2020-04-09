@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page import="hu.icell.entities.User" %>
+<%@page import="hu.icell.common.dto.UserDTO"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -227,7 +227,7 @@
             	var url = "<%= request.getContextPath() %>/game/result/save";
             	var obj = new Object();
             	obj.seconds = seconds;
-            	obj.userId = <%= ((User)request.getSession().getAttribute("user")).getId() %>;
+            	obj.userId = <%= ((UserDTO)request.getSession().getAttribute("user")).getId() %>;
             	var params = JSON.stringify(obj);
             	http.open("POST", url, true);
 
@@ -264,9 +264,9 @@
 		<ul>
 			<li><a class="active" href="<%= request.getContextPath() %>">Game</a></li>
 			<li><a href="<%= request.getContextPath() %>/game/result">Results</a></li>
-			<li><a href="<%= request.getContextPath() %>/game/result/<%= ((User)request.getSession().getAttribute("user")).getId() %>">My results</a></li>
+			<li><a href="<%= request.getContextPath() %>/game/result/<%= ((UserDTO)request.getSession().getAttribute("user")).getId() %>">My results</a></li>
 			<li class="right" ><a href="<%= request.getContextPath() %>/game/logout">Logout</a></li>
-			<li class="right" ><span><%= ((User)request.getSession().getAttribute("user")).getUsername() %></span></li>
+			<li class="right" ><span><%= ((UserDTO)request.getSession().getAttribute("user")).getUsername() %></span></li>
 		</ul>
 	</div>
 	<div id="main">

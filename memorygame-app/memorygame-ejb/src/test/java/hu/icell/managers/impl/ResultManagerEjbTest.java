@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.After;
@@ -16,9 +17,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import hu.icell.common.dto.ResultDTO;
+import hu.icell.common.dto.UserDTO;
 import hu.icell.dao.impl.ResultDaoEjb;
-import hu.icell.dao.interfaces.ResultDaoLocal;
-import hu.icell.dao.interfaces.ResultDataDaoLocal;
+import hu.icell.dao.impl.ResultDataDaoEjb;
+import hu.icell.dto.helper.DtoHelper;
 import hu.icell.entities.Result;
 import hu.icell.entities.User;
 import hu.icell.exception.MyApplicationException;
@@ -31,16 +34,19 @@ public class ResultManagerEjbTest {
     private ResultManagerEjb underTest;
     
     @Mock
-    private ResultDaoLocal resultDao;
+    private ResultDaoEjb resultDao;
 
     @Mock
-    private ResultDataDaoLocal resultDataDao;
+    private ResultDataDaoEjb resultDataDao;
     
     @Mock
     private Result testResult;
     
     @Mock
     private User testUser;
+    
+    @Mock
+    private UserDTO testUserDTO;
     
     private List<Result> testList = new ArrayList<Result>();
     private List<Result> testListByUser = new ArrayList<Result>();
@@ -53,7 +59,14 @@ public class ResultManagerEjbTest {
     public void setUp() throws Exception {
         testListByUser.add(testResult);
         for (int i = 0; i < 5; i++) {
-            testList.add(new Result());
+        	Result result = new Result();
+        	result.setId(1L);
+        	result.setId(50);
+        	result.setResultDate(new Date());
+        	User user = new User();
+        	user.setUsername("Username");
+        	result.setUser(user);
+            testList.add(result);
         }
         when(resultDao.getResultsByUser(testUser)).thenReturn(testListByUser);
         when(resultDao.getResults()).thenReturn(testList);
@@ -66,15 +79,14 @@ public class ResultManagerEjbTest {
 
     @Test
     public void testGetResults() {
-        List<Result> list = underTest.getResults();
-        assertEquals(testList, list);
+        List<ResultDTO> list = underTest.getResults();
+        verify(resultDao, times(1)).getResults();
     }
 
     @Test
     public void testGetResultsByUser() {
-        List<Result> list = underTest.getResultsByUser(testUser);
-        assertEquals(testListByUser, list);
-        verify(resultDao, times(1)).getResultsByUser(testUser);
+        List<ResultDTO> list = underTest.getResultsByUser(testUserDTO);
+        verify(resultDao, times(1)).getResultsByUser(any());
     }
 
     @Test

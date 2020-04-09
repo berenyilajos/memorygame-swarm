@@ -11,6 +11,8 @@
   <modules>
   	<module>memorygame</module>
   	<module>memorygame-ejb</module>
+  	<module>memorygame-ejbclient</module>
+  	<module>memorygame-ear</module>
   </modules>
   
   <dependencyManagement>

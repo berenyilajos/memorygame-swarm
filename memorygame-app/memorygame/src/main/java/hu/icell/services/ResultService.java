@@ -18,19 +18,17 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import hu.icell.common.dto.ResultDTO;
+import hu.icell.common.dto.UserDTO;
 import hu.icell.common.logger.AppLogger;
 import hu.icell.common.logger.ThisLogger;
-import hu.icell.entities.Result;
-import hu.icell.entities.User;
-import hu.icell.managers.interfaces.ResultManagerLocal;
+import hu.icell.ejb.EjbFinder;
+import hu.icell.exception.MyApplicationException;
 
 @Stateless
 @LocalBean
 @Path("/result")
 public class ResultService {
-	
-    @EJB
-    private ResultManagerLocal resultManager;
     
     @Inject
     @ThisLogger
@@ -66,7 +64,7 @@ public class ResultService {
         }
         
 //        List<Result> list = resultAction.getResults();
-        List<Result> list = resultManager.getResultsData();
+        List<ResultDTO> list = EjbFinder.getResultManager().getResultsData();
 //      em.getTransaction().commit();
         
         request.setAttribute("list", list);
@@ -83,12 +81,12 @@ public class ResultService {
             throws ServletException, IOException {
         log.debug("ResultService.showAction, userId=[{}] >>>", userId);
         HttpSession session = request.getSession(false);
-        User user;
-        if (session == null || (user = (User)session.getAttribute("user")) == null || user.getId() != Long.parseLong(userId)) {
+        UserDTO user;
+        if (session == null || (user = (UserDTO)session.getAttribute("user")) == null || user.getId() != Long.parseLong(userId)) {
             response.sendRedirect("/memorygame/game/login");
             return;
         }
-        List<Result> list = resultManager.getResultsByUser(user);
+        List<ResultDTO> list = EjbFinder.getResultManager().getResultsByUser(user);
         request.setAttribute("list", list);
         log.debug("<<< ResultService.showAction");
         

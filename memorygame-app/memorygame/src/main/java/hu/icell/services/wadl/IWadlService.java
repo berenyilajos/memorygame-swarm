@@ -29,11 +29,6 @@ public interface IWadlService {
     public String testAlive();
     
     @GET
-    @Path("/testConnection")
-    @Produces("text/plain")
-    public String testConnection();
-    
-    @GET
     @Path("/versionInfo")
     @Produces("text/plain")
     public String getVersionInfo(@Context HttpServletRequest servletRequest);

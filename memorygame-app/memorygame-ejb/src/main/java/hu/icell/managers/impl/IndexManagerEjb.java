@@ -5,23 +5,25 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 
+import hu.icell.common.dto.UserDTO;
 import hu.icell.dao.interfaces.AuthDaoLocal;
-import hu.icell.entities.User;
+import hu.icell.dto.helper.DtoHelper;
 import hu.icell.exception.UserAllreadyExistException;
 import hu.icell.managers.interfaces.IndexManagerLocal;
+import hu.icell.managers.interfaces.IndexManagerRemote;
 
 @Stateless
-public class IndexManagerEjb implements IndexManagerLocal {
+public class IndexManagerEjb implements IndexManagerLocal, IndexManagerRemote {
 	
     @EJB
     private AuthDaoLocal authDao;
     
-    public User getUserByUsername(String username) {
-        return authDao.getUserByUsername(username);
+    public UserDTO getUserByUsername(String username) {
+        return DtoHelper.toDTO(authDao.getUserByUsername(username));
     }
     
-    public User getUserByUsernameAndPassword(String username, String password) {
-        return authDao.getUserByUsernameAndPassword(username, password);
+    public UserDTO getUserByUsernameAndPassword(String username, String password) {
+        return DtoHelper.toDTO(authDao.getUserByUsernameAndPassword(username, password));
     }
 
     @TransactionAttribute(TransactionAttributeType.REQUIRED)

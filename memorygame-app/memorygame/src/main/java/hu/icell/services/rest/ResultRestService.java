@@ -13,13 +13,13 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import hu.icell.common.dto.UserDTO;
 import hu.icell.common.logger.AppLogger;
 import hu.icell.common.logger.ThisLogger;
-import hu.icell.entities.ResultData;
-import hu.icell.entities.User;
+import hu.icell.ejb.EjbFinder;
 import hu.icell.exception.MyApplicationException;
-import hu.icell.managers.interfaces.ResultDataManagerLocal;
-import hu.icell.managers.interfaces.ResultManagerLocal;
+import hu.icell.managers.interfaces.ResultDataManagerRemote;
+import hu.icell.managers.interfaces.ResultManagerRemote;
 import hu.icell.services.BaseService;
 import hu.icell.xsdpojo.pojo.ResultResponse;
 import hu.icell.xsdpojo.pojo.ResultRequest;
@@ -31,12 +31,6 @@ import java.util.List;
 @LocalBean
 @Path("/result")
 public class ResultRestService extends BaseService {
-	
-    @EJB
-    private ResultManagerLocal resultManager;
-
-    @EJB
-    private ResultDataManagerLocal resultDataManager;
     
     @Inject
     @ThisLogger
@@ -65,21 +59,22 @@ public class ResultRestService extends BaseService {
         Long userId = resultRequest.getUserId();
         resultResponse.setSeconds(seconds);
         HttpSession session = request.getSession(false);
-        User user;
+        UserDTO user;
         if (userId <= 0 || seconds <= 0) {
             resultResponse.setSuccess(SuccessType.ERROR);
             resultResponse.setMessage("Invalid input!");
             return resultResponse;
-        } else if (session == null || (user = (User)session.getAttribute("user")) == null || user.getId() != userId) {
+        } else if (session == null || (user = (UserDTO)session.getAttribute("user")) == null || user.getId() != userId) {
             resultResponse.setSuccess(SuccessType.ERROR);
             resultResponse.setMessage("User is not logged in!");
             return resultResponse;
         }
-        resultManager.saveResult(seconds, userId);
-//        resultDataAction.saveResultData(seconds, userId);
-//        List<ResultData> resultDatas = resultDataAction.getResultsDatas();
+        EjbFinder.getResultManager().saveResult(seconds, userId);
+//        ResultDataManagerRemote resultDataManager = EjbFinder.getResultManager()
+//        resultDataManager.saveResultData(seconds, userId);
+//        List<ResultDataDTO> resultDatas = resultDataManager.getResultsDatas();
 //        log.info("ResultDatas: " + resultDatas);
-//        resultDatas = resultDataAction.getResults();
+//        resultDatas = resultDataManager.getResults();
 //        log.info("ResultDatas by repository: " + resultDatas);
         resultResponse.setSuccess(SuccessType.SUCCESS);
         resultResponse.setUserId(userId);

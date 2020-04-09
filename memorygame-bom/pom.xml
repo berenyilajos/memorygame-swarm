@@ -18,6 +18,7 @@
 		<version.memorygame-common-transaction>0.0.1-SNAPSHOT</version.memorygame-common-transaction>
 		<version.memorygame>0.0.1-SNAPSHOT</version.memorygame>
 		<version.memorygame-ejb>0.0.1-SNAPSHOT</version.memorygame-ejb>
+		<version.memorygame-ejbclient>0.0.1-SNAPSHOT</version.memorygame-ejbclient>
 		<version.memorygame-quartz-job>0.0.1-SNAPSHOT</version.memorygame-quartz-job>
 		<version.memorygame-quartz-listener>0.0.1-SNAPSHOT</version.memorygame-quartz-listener>
 		<version.org.apache.commons.commons-lang3>3.5</version.org.apache.commons.commons-lang3>
@@ -43,6 +44,7 @@
 		<version.ch.qos.logback.logback-classic>1.2.3</version.ch.qos.logback.logback-classic>
 		<version.com.oracle.ojdbc6>11.2.03</version.com.oracle.ojdbc6>
 		<version.commons-io.commons-io>2.4</version.commons-io.commons-io>
+		<wildfly.swarm.version>2.6.0.Final</wildfly.swarm.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -101,6 +103,13 @@
 				<groupId>hu.icell</groupId>
 				<artifactId>memorygame-ejb</artifactId>
 				<version>${version.memorygame-ejb}</version>
+			</dependency>
+			
+			<!-- memorygame-ejbclient -->
+			<dependency>
+				<groupId>hu.icell</groupId>
+				<artifactId>memorygame-ejbclient</artifactId>
+				<version>${version.memorygame-ejbclient}</version>
 			</dependency>
 
 			<!-- memorygame-quartz-job -->
@@ -286,6 +295,43 @@
 				<artifactId>commons-io</artifactId>
 				<version>${version.commons-io.commons-io}</version>
 				<scope>provided</scope>
+			</dependency>
+			
+			<!-- Wildfly Swarm dependencies -->
+			<dependency>
+			   <groupId>io.thorntail</groupId>
+			   <artifactId>jpa</artifactId>
+			   <version>${wildfly.swarm.version}</version>
+			</dependency>
+			<dependency>
+			   <groupId>io.thorntail</groupId>
+			   <artifactId>jaxrs</artifactId>
+			   <version>${wildfly.swarm.version}</version>
+			</dependency>
+			<dependency>
+			   <groupId>io.thorntail</groupId>
+			   <artifactId>cdi</artifactId>
+			   <version>${wildfly.swarm.version}</version>
+			</dependency>
+			<dependency>
+			   <groupId>io.thorntail</groupId>
+			   <artifactId>ejb</artifactId>
+			   <version>${wildfly.swarm.version}</version>
+			</dependency>
+			<dependency>
+			   <groupId>io.thorntail</groupId>
+			   <artifactId>ejb-remote</artifactId>
+			   <version>${wildfly.swarm.version}</version>
+			</dependency>
+			<dependency>
+			   <groupId>io.thorntail</groupId>
+			   <artifactId>transactions</artifactId>
+			   <version>${wildfly.swarm.version}</version>
+			</dependency>
+			<dependency>
+			   <groupId>io.thorntail</groupId>
+			   <artifactId>security</artifactId>
+			   <version>${wildfly.swarm.version}</version>
 			</dependency>
 
 			<dependency>

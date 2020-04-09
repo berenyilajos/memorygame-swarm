@@ -27,10 +27,6 @@ import hu.icell.exception.MyApplicationException;
 
 @Model
 public class WadlService  implements IWadlService {
-	
-	@Inject
-	@MemorygameDatabase
-	private EntityManager em;
     
     @Inject
     @ThisLogger
@@ -83,13 +79,6 @@ public class WadlService  implements IWadlService {
 	@Override
     public String testAlive() {
         log.debug("WadlService.testAlive >>>");
-        return "OK";
-    }
-    
-    @Override
-    public String testConnection() {
-        log.debug("WadlService.testConnection >>>");
-        em.createNativeQuery("select 1 from dual").getResultList();
         return "OK";
     }
     
