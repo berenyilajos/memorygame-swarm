@@ -36,7 +36,7 @@
 		</dependency>
 		<dependency>
 			<groupId>hu.icell</groupId>
-			<artifactId>memorygame-action</artifactId>
+			<artifactId>memorygame-ejb</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
@@ -73,6 +73,11 @@
 		<dependency>
 		   <groupId>io.thorntail</groupId>
 		   <artifactId>cdi</artifactId>
+		   <version>${wildfly.swarm.version}</version>
+		</dependency>
+		<dependency>
+		   <groupId>io.thorntail</groupId>
+		   <artifactId>ejb</artifactId>
 		   <version>${wildfly.swarm.version}</version>
 		</dependency>
 		<dependency>

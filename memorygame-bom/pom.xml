@@ -17,8 +17,7 @@
 		<version.memorygame-common-exception>0.0.1-SNAPSHOT</version.memorygame-common-exception>
 		<version.memorygame-common-transaction>0.0.1-SNAPSHOT</version.memorygame-common-transaction>
 		<version.memorygame>0.0.1-SNAPSHOT</version.memorygame>
-		<version.memorygame-action>0.0.1-SNAPSHOT</version.memorygame-action>
-		<version.memorygame-dao>0.0.1-SNAPSHOT</version.memorygame-dao>
+		<version.memorygame-ejb>0.0.1-SNAPSHOT</version.memorygame-ejb>
 		<version.memorygame-quartz-job>0.0.1-SNAPSHOT</version.memorygame-quartz-job>
 		<version.memorygame-quartz-listener>0.0.1-SNAPSHOT</version.memorygame-quartz-listener>
 		<version.org.apache.commons.commons-lang3>3.5</version.org.apache.commons.commons-lang3>
@@ -97,18 +96,11 @@
 				<version>${version.memorygame}</version>
 			</dependency>
 
-			<!-- memorygame-action -->
+			<!-- memorygame-ejb -->
 			<dependency>
 				<groupId>hu.icell</groupId>
-				<artifactId>memorygame-action</artifactId>
-				<version>${version.memorygame-action}</version>
-			</dependency>
-
-			<!-- memorygame-dao -->
-			<dependency>
-				<groupId>hu.icell</groupId>
-				<artifactId>memorygame-dao</artifactId>
-				<version>${version.memorygame-dao}</version>
+				<artifactId>memorygame-ejb</artifactId>
+				<version>${version.memorygame-ejb}</version>
 			</dependency>
 
 			<!-- memorygame-quartz-job -->

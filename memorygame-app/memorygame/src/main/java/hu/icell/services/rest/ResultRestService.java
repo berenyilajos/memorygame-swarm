@@ -1,5 +1,8 @@
 package hu.icell.services.rest;
 
+import javax.ejb.EJB;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -10,13 +13,13 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
-import hu.icell.actions.ResultAction;
-import hu.icell.actions.ResultDataAction;
 import hu.icell.common.logger.AppLogger;
 import hu.icell.common.logger.ThisLogger;
 import hu.icell.entities.ResultData;
 import hu.icell.entities.User;
 import hu.icell.exception.MyApplicationException;
+import hu.icell.managers.interfaces.ResultDataManagerLocal;
+import hu.icell.managers.interfaces.ResultManagerLocal;
 import hu.icell.services.BaseService;
 import hu.icell.xsdpojo.pojo.ResultResponse;
 import hu.icell.xsdpojo.pojo.ResultRequest;
@@ -24,13 +27,16 @@ import hu.icell.xsdpojo.common.common.SuccessType;
 
 import java.util.List;
 
+@Stateless
+@LocalBean
 @Path("/result")
 public class ResultRestService extends BaseService {
-    @Inject
-    private ResultAction resultAction;
+	
+    @EJB
+    private ResultManagerLocal resultManager;
 
-    @Inject
-    private ResultDataAction resultDataAction;
+    @EJB
+    private ResultDataManagerLocal resultDataManager;
     
     @Inject
     @ThisLogger
@@ -69,7 +75,7 @@ public class ResultRestService extends BaseService {
             resultResponse.setMessage("User is not logged in!");
             return resultResponse;
         }
-        resultAction.saveResult(seconds, userId);
+        resultManager.saveResult(seconds, userId);
 //        resultDataAction.saveResultData(seconds, userId);
 //        List<ResultData> resultDatas = resultDataAction.getResultsDatas();
 //        log.info("ResultDatas: " + resultDatas);

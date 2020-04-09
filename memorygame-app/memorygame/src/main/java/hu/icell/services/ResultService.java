@@ -3,6 +3,9 @@ package hu.icell.services;
 import java.io.IOException;
 import java.util.List;
 
+import javax.ejb.EJB;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,16 +18,19 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
-import hu.icell.actions.ResultAction;
 import hu.icell.common.logger.AppLogger;
 import hu.icell.common.logger.ThisLogger;
 import hu.icell.entities.Result;
 import hu.icell.entities.User;
+import hu.icell.managers.interfaces.ResultManagerLocal;
 
+@Stateless
+@LocalBean
 @Path("/result")
 public class ResultService {
-    @Inject
-    private ResultAction resultAction;
+	
+    @EJB
+    private ResultManagerLocal resultManager;
     
     @Inject
     @ThisLogger
@@ -60,7 +66,7 @@ public class ResultService {
         }
         
 //        List<Result> list = resultAction.getResults();
-        List<Result> list = resultAction.getResultsData();
+        List<Result> list = resultManager.getResultsData();
 //      em.getTransaction().commit();
         
         request.setAttribute("list", list);
@@ -82,7 +88,7 @@ public class ResultService {
             response.sendRedirect("/memorygame/game/login");
             return;
         }
-        List<Result> list = resultAction.getResultsByUser(user);
+        List<Result> list = resultManager.getResultsByUser(user);
         request.setAttribute("list", list);
         log.debug("<<< ResultService.showAction");
         

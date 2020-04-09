@@ -2,6 +2,9 @@ package hu.icell.services;
 
 import java.io.IOException;
 
+import javax.ejb.EJB;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -17,17 +20,19 @@ import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.lang3.StringUtils;
 
-import hu.icell.actions.IndexAction;
 import hu.icell.common.logger.AppLogger;
 import hu.icell.common.logger.ThisLogger;
 import hu.icell.entities.User;
 import hu.icell.exception.UserAllreadyExistException;
+import hu.icell.managers.interfaces.IndexManagerLocal;
 
+@Stateless
+@LocalBean
 @Path("")
 public class IndexService {
     
-    @Inject
-    private IndexAction indexAction;
+    @EJB
+    private IndexManagerLocal indexManager;
     
     @Inject
     @ThisLogger
@@ -57,7 +62,7 @@ public class IndexService {
         log.debug("IndexService.loginAction, username=[{}] >>>", username);
         String msg = "";
         if (StringUtils.isNotBlank(username) && StringUtils.isNotBlank(password)) {
-            User user = indexAction.getUserByUsernameAndPassword(username, password);
+            User user = indexManager.getUserByUsernameAndPassword(username, password);
             if (user == null) {
                 msg = "Hibás felhasználónév vagy jelszó!";
             } else {
@@ -108,7 +113,7 @@ public class IndexService {
             }
             if (msg.isEmpty()) {
                 try {
-                    indexAction.saveUser(username, password);
+                    indexManager.saveUser(username, password);
                     response.sendRedirect("/memorygame/game/login");
                     return;
                 } catch(UserAllreadyExistException ex) {

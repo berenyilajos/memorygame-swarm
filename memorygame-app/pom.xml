@@ -10,8 +10,7 @@
   <name>memorygame-app</name>
   <modules>
   	<module>memorygame</module>
-  	<module>memorygame-dao</module>
-  	<module>memorygame-action</module>
+  	<module>memorygame-ejb</module>
   </modules>
   
   <dependencyManagement>
