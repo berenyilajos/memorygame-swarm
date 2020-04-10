@@ -44,6 +44,7 @@
 		<version.ch.qos.logback.logback-classic>1.2.3</version.ch.qos.logback.logback-classic>
 		<version.com.oracle.ojdbc6>11.2.03</version.com.oracle.ojdbc6>
 		<version.commons-io.commons-io>2.4</version.commons-io.commons-io>
+		<version.org.jboss.spec.javax.rmi>1.0.6.Final</version.org.jboss.spec.javax.rmi>
 		<wildfly.swarm.version>2.6.0.Final</wildfly.swarm.version>
 	</properties>
 	<dependencyManagement>
@@ -274,6 +275,13 @@
 				<artifactId>cdi-api</artifactId>
 				<version>${version.javax.enterprise.cdi-api}</version>
 				<scope>provided</scope>
+			</dependency>
+			
+			<dependency>
+			    <groupId>org.jboss.spec.javax.rmi</groupId>
+			    <artifactId>jboss-rmi-api_1.0_spec</artifactId>
+			    <version>${version.org.jboss.spec.javax.rmi}</version>
+			    <scope>provided</scope>
 			</dependency>
 
 			<dependency>

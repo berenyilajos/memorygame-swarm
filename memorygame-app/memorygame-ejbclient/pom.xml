@@ -27,5 +27,9 @@
 			<groupId>javax.enterprise</groupId>
 			<artifactId>cdi-api</artifactId>
 		</dependency>
+		<dependency>
+		    <groupId>org.jboss.spec.javax.rmi</groupId>
+		    <artifactId>jboss-rmi-api_1.0_spec</artifactId>
+		</dependency>
 	</dependencies>
 </project>

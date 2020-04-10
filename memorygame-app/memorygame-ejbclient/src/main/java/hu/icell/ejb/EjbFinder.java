@@ -5,6 +5,7 @@ import java.util.Properties;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.rmi.PortableRemoteObject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +40,9 @@ public class EjbFinder {
 			String viewClassName = remoteInterfaceClass.getName();
 			String lookupText = namespace + appName + "/" + moduleName + "/" + distinctName + "/" + beanName + "!" + viewClassName;
 			logger.info("lookupText: " + lookupText);
-			return (T) ctx.lookup(lookupText);
+//			return (T) ctx.lookup(lookupText);
+			java.lang.Object corbaObject = ctx.lookup(lookupText);
+			return (T) PortableRemoteObject.narrow(corbaObject, remoteInterfaceClass);
 		} catch (NamingException e) {
 			logger.debug(e.getMessage(), e);
 			throw new RuntimeException(e);
