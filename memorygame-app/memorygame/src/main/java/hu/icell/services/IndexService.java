@@ -22,8 +22,6 @@ import org.apache.commons.lang3.StringUtils;
 import hu.icell.common.dto.UserDTO;
 import hu.icell.common.logger.AppLogger;
 import hu.icell.common.logger.ThisLogger;
-import hu.icell.ejb.EjbFinder;
-import hu.icell.exception.MyApplicationException;
 import hu.icell.exception.UserAllreadyExistException;
 import hu.icell.managers.interfaces.IndexManagerRemote;
 
@@ -31,6 +29,9 @@ import hu.icell.managers.interfaces.IndexManagerRemote;
 @LocalBean
 @Path("")
 public class IndexService {
+	
+	@Inject
+	private IndexManagerRemote indexManager;
     
     @Inject
     @ThisLogger
@@ -60,7 +61,7 @@ public class IndexService {
         log.debug("IndexService.loginAction, username=[{}] >>>", username);
         String msg = "";
         if (StringUtils.isNotBlank(username) && StringUtils.isNotBlank(password)) {
-            UserDTO user = EjbFinder.getIndexManager().getUserByUsernameAndPassword(username, password);
+            UserDTO user = indexManager.getUserByUsernameAndPassword(username, password);
             if (user == null) {
                 msg = "Hibás felhasználónév vagy jelszó!";
             } else {
@@ -111,7 +112,7 @@ public class IndexService {
             }
             if (msg.isEmpty()) {
                 try {
-                    EjbFinder.getIndexManager().saveUser(username, password);
+                    indexManager.saveUser(username, password);
                     response.sendRedirect("/memorygame/game/login");
                     return;
                 } catch(UserAllreadyExistException ex) {

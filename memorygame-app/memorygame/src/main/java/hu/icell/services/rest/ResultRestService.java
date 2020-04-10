@@ -1,6 +1,5 @@
 package hu.icell.services.rest;
 
-import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -16,7 +15,6 @@ import javax.ws.rs.core.MediaType;
 import hu.icell.common.dto.UserDTO;
 import hu.icell.common.logger.AppLogger;
 import hu.icell.common.logger.ThisLogger;
-import hu.icell.ejb.EjbFinder;
 import hu.icell.exception.MyApplicationException;
 import hu.icell.managers.interfaces.ResultDataManagerRemote;
 import hu.icell.managers.interfaces.ResultManagerRemote;
@@ -25,12 +23,16 @@ import hu.icell.xsdpojo.pojo.ResultResponse;
 import hu.icell.xsdpojo.pojo.ResultRequest;
 import hu.icell.xsdpojo.common.common.SuccessType;
 
-import java.util.List;
-
 @Stateless
 @LocalBean
 @Path("/result")
 public class ResultRestService extends BaseService {
+	
+	@Inject
+	private ResultManagerRemote resultManager;
+	
+	@Inject
+	private ResultDataManagerRemote resultDataManager;
     
     @Inject
     @ThisLogger
@@ -69,8 +71,7 @@ public class ResultRestService extends BaseService {
             resultResponse.setMessage("User is not logged in!");
             return resultResponse;
         }
-        EjbFinder.getResultManager().saveResult(seconds, userId);
-//        ResultDataManagerRemote resultDataManager = EjbFinder.getResultManager()
+        resultManager.saveResult(seconds, userId);
 //        resultDataManager.saveResultData(seconds, userId);
 //        List<ResultDataDTO> resultDatas = resultDataManager.getResultsDatas();
 //        log.info("ResultDatas: " + resultDatas);
