@@ -32,12 +32,12 @@ public class EjbFinder {
 	private static <T> T lookupBean(Class<T> remoteInterfaceClass, String beanName) {
 		try {
 			Context ctx = createInitialContext();
-			String namespace = "";
-			String appName = "ejb:";
+			String namespace = "ejb:";
+			String appName = "";
 			String moduleName = "memorygame-ear";
 			String distinctName = "";
 			String viewClassName = remoteInterfaceClass.getName();
-			String lookupText = namespace + appName + "/" + moduleName + "/" + beanName + "!" + viewClassName;
+			String lookupText = namespace + appName + "/" + moduleName + "/" + distinctName + "/" + beanName + "!" + viewClassName;
 			logger.info("lookupText: " + lookupText);
 			return (T) ctx.lookup(lookupText);
 		} catch (NamingException e) {
