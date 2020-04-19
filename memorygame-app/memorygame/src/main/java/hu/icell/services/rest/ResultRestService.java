@@ -1,5 +1,7 @@
 package hu.icell.services.rest;
 
+import java.util.Date;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -79,7 +81,15 @@ public class ResultRestService extends BaseService {
 //        log.info("ResultDatas by repository: " + resultDatas);
         resultResponse.setSuccess(SuccessType.SUCCESS);
         resultResponse.setUserId(userId);
-        //validateByXSD(resultResponse, XSD_POJO);
+        Date now = new Date();
+		resultResponse.setResultDate(now);
+		resultResponse.setResultDateTime(now);
+        try {
+			validateByXSD(resultResponse, XSD_POJO);
+		} catch (Exception e) {
+			log.warn(e.getMessage(), e);
+            throw new MyApplicationException("Save successful, but resultResponse incorrect: " + e.getMessage());
+		}
         log.debug("<<< ResultRestService.saveAction");
         return resultResponse;
     }

@@ -8,7 +8,7 @@
 		<xjc:serializable uid="12343" />
 			
 		<xjc:javaType name="java.util.Date" xmlType="xs:date" adapter="hu.icell.common.jaxb.bindings.DateDataTypeAdapter" />
-		<xjc:javaType name="java.util.Date" xmlType="xs:datetime" adapter="hu.icell.common.jaxb.bindings.DateTimeDataTypeAdapter" />
+		<xjc:javaType name="java.util.Date" xmlType="xs:dateTime" adapter="hu.icell.common.jaxb.bindings.DateTimeDataTypeAdapter" />
 	</jaxb:globalBindings>
 
 </jaxb:bindings>
