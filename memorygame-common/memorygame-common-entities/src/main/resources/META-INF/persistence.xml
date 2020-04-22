@@ -12,10 +12,11 @@
         <validation-mode>NONE</validation-mode>
 		
 		<properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect" />
             <property name="hibernate.hbm2ddl.auto" value="none"/>
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
-            <property name="hibernate.transaction.manager_lookup_class" value="org.hibernate.transaction.JBossTransactionManagerLookup" />
+            <property name="hibernate.transaction.manager_lookup_class" value="jta" />
             <property name="hibernate.connection.release_mode" value="auto"/>
 
             <property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.JBossAppServerJtaPlatform" />
