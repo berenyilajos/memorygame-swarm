@@ -19,4 +19,5 @@ public interface ResultDaoLocal {
 	
 	void saveResult(int seconds, long userId) throws MyApplicationException;
 
+    List<Result> getResultsBetterOrEquals(long seconds);
 }

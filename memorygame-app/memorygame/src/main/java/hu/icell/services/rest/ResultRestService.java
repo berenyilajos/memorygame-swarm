@@ -1,6 +1,7 @@
 package hu.icell.services.rest;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -8,16 +9,20 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import hu.icell.common.dto.ResultDTO;
 import hu.icell.common.dto.UserDTO;
 import hu.icell.common.logger.AppLogger;
 import hu.icell.common.logger.ThisLogger;
 import hu.icell.exception.MyApplicationException;
+import hu.icell.jwt.RestSecure;
 import hu.icell.managers.interfaces.ResultDataManagerRemote;
 import hu.icell.managers.interfaces.ResultManagerRemote;
 import hu.icell.services.BaseService;
@@ -46,6 +51,7 @@ public class ResultRestService extends BaseService {
     @Path("/save")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
+    @RestSecure
     public ResultResponse saveAction(@Context HttpServletRequest request,  ResultRequest resultRequest) throws MyApplicationException {
         
         log.debug("ResultRestService.saveAction >>>");
@@ -92,6 +98,14 @@ public class ResultRestService extends BaseService {
 		}
         log.debug("<<< ResultRestService.saveAction");
         return resultResponse;
+    }
+
+    @GET
+    @Path(value = "/betterorequals/{seconds:\\d+}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @RestSecure
+    public List<ResultDTO> getResultsBetterOrEquals(@PathParam("seconds") long seconds) {
+        return resultManager.getResultsBetterOrEquals(seconds);
     }
 
     @Override

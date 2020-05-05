@@ -17,6 +17,53 @@ swarm:
         servlet-containers:
             default:
                 allow-non-standard-wrappers: true
+    deployment:
+        memorygame.war:
+            web:
+                login-config:
+                    auth-method: DIGEST
+#                    form-login-config:
+#                        form-login-page: /login.jsp
+#                        form-error-page: /login_error.jsp
+                    security-domain: my-domain
+                security-constraints:
+                    - url-pattern: /nonexists/*
+                      methods: [GET, POST, PUT, DELETE]
+                      roles: [admin, user]
+    security:
+        security-domains:
+            my-domain:
+                classic-authentication:
+                    login-modules:
+                        Database:
+                            code: Database
+                            flag: required
+                            module-options:
+                                dsJndiName: java:/MemoryGameDS
+                                principalsQuery: SELECT password FROM USERS WHERE username=?
+                                rolesQuery: SELECT 'user', 'Roles' FROM USERS WHERE username=?
+    datasources:
+        xa-data-sources:
+            MemoryGameDS:
+                driver-name: oracle
+                xa-datasource-class: oracle.jdbc.xa.client.OracleXADataSource
+                jndi-name: java:/MemoryGameDS
+                user-name: MG
+                password: mg
+                min-pool-size: 10
+                max-pool-size: 20
+                check-valid-connection-sql: select ISVALIDSESSION from dual
+                valid-connection-checker-class-name: org.jboss.jca.adapters.jdbc.extensions.oracle.OracleValidConnectionChecker
+                validate-on-match: true
+                background-validation: false
+                stale-connection-checker-class-name: org.jboss.jca.adapters.jdbc.extensions.oracle.OracleValidConnectionChecker
+                exception-sorter-class-name: org.jboss.jca.adapters.jdbc.extensions.oracle.OracleExceptionSorter
+                same-rm-override: false
+                no-tx-separate-pool: true
+                no-recovery: true
+                xa-datasource-properties:
+                    URL:
+                        value: jdbc:oracle:thin:@localhost:1521:XE
     logging:
         root-logger:
             level: INFO

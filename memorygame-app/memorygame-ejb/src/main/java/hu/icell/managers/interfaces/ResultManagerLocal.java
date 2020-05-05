@@ -19,4 +19,5 @@ public interface ResultManagerLocal {
 	
 	void saveResult(int seconds, long userId) throws MyApplicationException;
 
+	List<ResultDTO> getResultsBetterOrEquals(long seconds);
 }

@@ -19,4 +19,5 @@ public interface ResultManagerRemote {
 	
 	void saveResult(int seconds, long userId) throws MyApplicationException;
 
+    List<ResultDTO> getResultsBetterOrEquals(long seconds);
 }

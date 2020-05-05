@@ -44,5 +44,10 @@ public class ResultManagerEjb implements ResultManagerLocal, ResultManagerRemote
         resultDao.saveResult(seconds, userId);
         resultDataDao.saveResultData(seconds, userId);
     }
+
+    public List<ResultDTO> getResultsBetterOrEquals(long seconds) {
+        return DtoHelper
+                .resultsToDTO(resultDao.getResultsBetterOrEquals(seconds));
+    }
     
 }

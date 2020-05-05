@@ -16,7 +16,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.SecurityContext;
 
+import hu.icell.encrypt.Encrypter;
 import org.apache.commons.lang3.StringUtils;
 
 import hu.icell.common.dto.UserDTO;
@@ -43,7 +45,8 @@ public class IndexService {
     public void indexAction(@Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException, ServletException {
         log.debug("IndexService.indexAction >>>");
         HttpSession session = request.getSession(false);
-        if (session == null || session.getAttribute("user") == null) {
+        UserDTO user;
+        if (session == null || (user = (UserDTO) session.getAttribute("user")) == null) {
             response.sendRedirect("/memorygame/game/login");
             return;
         }
@@ -56,8 +59,8 @@ public class IndexService {
     @POST
     @Produces(MediaType.TEXT_HTML)
     @Path("/login")
-    public void loginAction(@Context HttpServletRequest request, @Context HttpServletResponse response, @FormParam("username") String username,
-            @FormParam("password") String password) throws ServletException, IOException {
+    public void loginAction(@Context SecurityContext securityContext, @Context HttpServletRequest request, @Context HttpServletResponse response, @FormParam("username") String username,
+                            @FormParam("password") String password) throws ServletException, IOException {
         log.debug("IndexService.loginAction, username=[{}] >>>", username);
         String msg = "";
         if (StringUtils.isNotBlank(username) && StringUtils.isNotBlank(password)) {
@@ -65,8 +68,13 @@ public class IndexService {
             if (user == null) {
                 msg = "Hibás felhasználónév vagy jelszó!";
             } else {
+                if (request.isSecure()) {
+                    request.logout();
+                }
                 HttpSession session = request.getSession(true);
                 session.setAttribute("user", user);
+                request.login(username, Encrypter.getMD5(password));
+                log.info("Login successful. User principal after login: " + request.getUserPrincipal());
                 response.sendRedirect("/memorygame/game");
                 return;
             }
@@ -82,12 +90,15 @@ public class IndexService {
     @GET
     @Produces(MediaType.TEXT_HTML)
     @Path("/logout")
-    public void logoutAction(@Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException {
+    public void logoutAction(@Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException, ServletException {
+        request.logout();
         HttpSession session = request.getSession(false);
         log.debug("IndexService.logoutAction, username=[{}] >>>", session != null ? (UserDTO)session.getAttribute("user") : null);
         if (session != null) {
             session.setAttribute("user", null);
-            session = null;
+            request.logout();
+            log.info("Logout successful. User principal after login: " + request.getUserPrincipal());
+            session.invalidate();
         }
         log.debug("<<< IndexService.logoutAction");
         response.sendRedirect("/memorygame/game/login");

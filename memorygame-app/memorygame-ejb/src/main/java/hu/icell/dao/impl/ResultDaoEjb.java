@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 //import org.apache.deltaspike.jpa.api.transaction.Transactional;
 
@@ -135,6 +136,16 @@ public class ResultDaoEjb implements ResultDaoLocal {
             throw new MyApplicationException(e.getMessage());
         }
         log.debug("<<< ResultDao.saveResult");
+    }
+
+    @Override
+    public List<Result> getResultsBetterOrEquals(long seconds) {
+        log.debug("ResultDao.getResultsBetterOrEquals, seconds=[{}] >>>", seconds);
+        String queryText = "SELECT r FROM Result r WHERE r.seconds <= :seconds";
+        TypedQuery<Result> query = em.createQuery(queryText, Result.class);
+        query.setParameter("seconds", seconds);
+        log.debug("<<< ResultDao.getResultsBetterOrEquals");
+        return query.getResultList();
     }
 
 }
