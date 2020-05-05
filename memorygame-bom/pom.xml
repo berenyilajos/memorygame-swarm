@@ -46,6 +46,7 @@
 		<version.commons-io.commons-io>2.4</version.commons-io.commons-io>
 		<version.org.jboss.spec.javax.rmi>1.0.6.Final</version.org.jboss.spec.javax.rmi>
 		<wildfly.swarm.version>2.6.0.Final</wildfly.swarm.version>
+		<version.ozark-thymeleaf>1.0.0-m04</version.ozark-thymeleaf>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -304,6 +305,11 @@
 				<version>${version.commons-io.commons-io}</version>
 				<scope>provided</scope>
 			</dependency>
+			<dependency>
+				<groupId>org.mvc-spec.ozark.ext</groupId>
+				<artifactId>ozark-thymeleaf</artifactId>
+				<version>${version.ozark-thymeleaf}</version>
+			</dependency>
 			
 			<!-- Wildfly Swarm dependencies -->
 			<dependency>
@@ -340,6 +346,11 @@
 			   <groupId>io.thorntail</groupId>
 			   <artifactId>security</artifactId>
 			   <version>${wildfly.swarm.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.thorntail</groupId>
+				<artifactId>mvc</artifactId>
+				<version>${wildfly.swarm.version}</version>
 			</dependency>
 
 			<dependency>

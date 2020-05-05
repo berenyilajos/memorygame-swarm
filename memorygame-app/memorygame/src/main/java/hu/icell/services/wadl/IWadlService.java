@@ -11,7 +11,7 @@ import javax.ws.rs.core.Response;
 
 import hu.icell.exception.MyApplicationException;
 
-@Path("")
+@Path("/game")
 @Produces(value = { MediaType.TEXT_XML, MediaType.APPLICATION_XML })
 public interface IWadlService {
 

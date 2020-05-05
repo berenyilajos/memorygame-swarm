@@ -6,6 +6,9 @@ import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.mvc.Controller;
+import javax.mvc.Models;
+import javax.mvc.binding.BindingResult;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,10 +27,17 @@ import hu.icell.common.logger.ThisLogger;
 import hu.icell.exception.MyApplicationException;
 import hu.icell.managers.interfaces.ResultManagerRemote;
 
+@Controller
 @Stateless
 @LocalBean
 @Path("/result")
 public class ResultService {
+
+    @Inject
+    Models models;
+
+    @Inject
+    BindingResult bindingResult;
 	
 	@Inject
 	private ResultManagerRemote resultManager;
@@ -39,41 +49,37 @@ public class ResultService {
     
     @GET
     @Produces(MediaType.TEXT_HTML)
-    public void listAction(@Context HttpServletRequest request, @Context HttpServletResponse response) throws ServletException, IOException {
+    public String listAction(@Context HttpServletRequest request, @Context HttpServletResponse response) throws ServletException, IOException {
         
         log.debug("ResultService.listAction >>>");
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("user") == null) {
-            response.sendRedirect("/memorygame/game/login");
-            return;
+            return "redirect:/login";
         }
         List<ResultDTO> list = resultManager.getResultsData();
         
-        request.setAttribute("list", list);
+        models.put("list", list);
         log.debug("<<< ResultService.listAction");
         
-        request.getRequestDispatcher("/WEB-INF/views/result/results.jsp")
-        .forward(request, response);
+        return "result/results.html";
     }
     
     @GET
     @Produces(MediaType.TEXT_HTML)
     @Path("/{userId:\\d+}")
-    public void showAction(@Context HttpServletRequest request, @Context HttpServletResponse response, @PathParam("userId") String userId)
+    public String showAction(@Context HttpServletRequest request, @Context HttpServletResponse response, @PathParam("userId") String userId)
             throws ServletException, IOException {
         log.debug("ResultService.showAction, userId=[{}] >>>", userId);
         HttpSession session = request.getSession(false);
         UserDTO user;
         if (session == null || (user = (UserDTO)session.getAttribute("user")) == null || user.getId() != Long.parseLong(userId)) {
-            response.sendRedirect("/memorygame/game/login");
-            return;
+            return "redirect:/login";
         }
         List<ResultDTO> list = resultManager.getResultsByUser(user);
-        request.setAttribute("list", list);
+        models.put("list", list);
         log.debug("<<< ResultService.showAction");
         
-        request.getRequestDispatcher("/WEB-INF/views/result/userresult.jsp")
-        .forward(request, response);
+        return "result/userresults.html";
     }
     
 }

@@ -5,6 +5,9 @@ import java.io.IOException;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.mvc.Controller;
+import javax.mvc.Models;
+import javax.mvc.binding.BindingResult;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,10 +30,17 @@ import hu.icell.common.logger.ThisLogger;
 import hu.icell.exception.UserAllreadyExistException;
 import hu.icell.managers.interfaces.IndexManagerRemote;
 
+@Controller
 @Stateless
 @LocalBean
 @Path("")
 public class IndexService {
+
+    @Inject
+    Models models;
+
+    @Inject
+    BindingResult bindingResult;
 	
 	@Inject
 	private IndexManagerRemote indexManager;
@@ -42,24 +52,28 @@ public class IndexService {
     @GET
     @Produces(MediaType.TEXT_HTML)
 //    @Path("")
-    public void indexAction(@Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException, ServletException {
+    public String indexAction(@Context HttpServletRequest request, @Context HttpServletResponse response) {
         log.debug("IndexService.indexAction >>>");
         HttpSession session = request.getSession(false);
         UserDTO user;
         if (session == null || (user = (UserDTO) session.getAttribute("user")) == null) {
-            response.sendRedirect("/memorygame/game/login");
-            return;
+            String url = request.getRequestURL().toString();
+            if (url.endsWith("/")) {
+                return "redirect:/login";
+            } else {
+                log.debug("redirect:/login doesn't work, we will try with //");
+                return "redirect://login";
+            }
         }
         log.debug("<<< IndexService.indexAction");
-        request.getRequestDispatcher("/WEB-INF/views/index.jsp")
-        .forward(request, response);
+        return "index.html";
     }
     
     @GET
     @POST
     @Produces(MediaType.TEXT_HTML)
     @Path("/login")
-    public void loginAction(@Context SecurityContext securityContext, @Context HttpServletRequest request, @Context HttpServletResponse response, @FormParam("username") String username,
+    public String loginAction(@Context SecurityContext securityContext, @Context HttpServletRequest request, @Context HttpServletResponse response, @FormParam("username") String username,
                             @FormParam("password") String password) throws ServletException, IOException {
         log.debug("IndexService.loginAction, username=[{}] >>>", username);
         String msg = "";
@@ -75,22 +89,20 @@ public class IndexService {
                 session.setAttribute("user", user);
                 request.login(username, Encrypter.getMD5(password));
                 log.info("Login successful. User principal after login: " + request.getUserPrincipal());
-                response.sendRedirect("/memorygame/game");
-                return;
+                return "redirect:";
             }
         }
-        request.setAttribute("msg", msg);
+        models.put("msg", msg);
         log.debug("<<< IndexService.loginAction");
-        
-        request.getRequestDispatcher("/WEB-INF/views/login.jsp")
-        .forward(request, response);
+
+        return "login.html";
 
     }
     
     @GET
     @Produces(MediaType.TEXT_HTML)
     @Path("/logout")
-    public void logoutAction(@Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException, ServletException {
+    public String logoutAction(@Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException, ServletException {
         request.logout();
         HttpSession session = request.getSession(false);
         log.debug("IndexService.logoutAction, username=[{}] >>>", session != null ? (UserDTO)session.getAttribute("user") : null);
@@ -101,7 +113,7 @@ public class IndexService {
             session.invalidate();
         }
         log.debug("<<< IndexService.logoutAction");
-        response.sendRedirect("/memorygame/game/login");
+        return "redirect:/login";
 
     }
     
@@ -109,7 +121,7 @@ public class IndexService {
     @POST
     @Produces(MediaType.TEXT_HTML)
     @Path("/register")
-    public void registerAction(@Context HttpServletRequest request, @Context HttpServletResponse response,
+    public String registerAction(@Context HttpServletRequest request, @Context HttpServletResponse response,
             @FormParam("username") String username,
             @FormParam("password") String password, @FormParam("password2") String password2) throws ServletException, IOException {
         log.debug("IndexService.registerAction, username=[{}] >>>", username);
@@ -124,18 +136,16 @@ public class IndexService {
             if (msg.isEmpty()) {
                 try {
                     indexManager.saveUser(username, password);
-                    response.sendRedirect("/memorygame/game/login");
-                    return;
+                    return "redirect:/login";
                 } catch(UserAllreadyExistException ex) {
                     msg = ex.getMessage();
                 }
             }
         }
-        request.setAttribute("msg", msg);
+        models.put("msg", msg);
         log.debug("<<< IndexService.registerAction");
         
-        request.getRequestDispatcher("/WEB-INF/views/register.jsp")
-        .forward(request, response);
+        return "register.html";
 
     }
 }
