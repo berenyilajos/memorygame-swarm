@@ -1,0 +1,77 @@
+
+			<logging-profiles>
+                <logging-profile name="memorygame">
+                    <console-handler name="CONSOLE">
+                        <level name="DEBUG"/>
+                        <formatter>
+                            <named-formatter name="COLOR-PATTERN"/>
+                        </formatter>
+                    </console-handler>
+                    <periodic-rotating-file-handler name="FILE" autoflush="true">
+                        <formatter>
+                            <named-formatter name="PATTERN"/>
+                        </formatter>
+                        <file relative-to="jboss.server.log.dir" path="memorygame/memorygame.log"/>
+                        <suffix value=".yyyy-MM-dd"/>
+                        <append value="true"/>
+                    </periodic-rotating-file-handler>
+                    <logger category="hu.icell">
+                        <level name="DEBUG"/>
+                    </logger>
+                    <root-logger>
+                        <level name="INFO"/>
+                        <handlers>
+                            <handler name="CONSOLE"/>
+                            <handler name="FILE"/>
+                        </handlers>
+                    </root-logger>
+                    <formatter name="PATTERN">
+                        <pattern-formatter pattern="%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%c] (%t) %s%e%n"/>
+                    </formatter>
+                    <formatter name="COLOR-PATTERN">
+                        <pattern-formatter pattern="%K{level}%d{HH:mm:ss,SSS} %-5p [%c] (%t) %s%e%n"/>
+                    </formatter>
+                </logging-profile>
+            </logging-profiles>
+            
+            	<datasource jta="true" jndi-name="java:/MemoryGameDS" pool-name="MemoryGameDS" enabled="true" use-java-context="true" use-ccm="true" statistics-enabled="${wildfly.datasources.statistics-enabled:${wildfly.statistics-enabled:false}}">
+                    <connection-url>jdbc:oracle:thin:@localhost:1521:xe</connection-url>
+                    <driver-class>oracle.jdbc.driver.OracleDriver</driver-class>
+                    <driver>oracle</driver>
+                    <pool>
+                        <min-pool-size>1</min-pool-size>
+                        <max-pool-size>20</max-pool-size>
+                    </pool>
+                    <security>
+                        <user-name>MG</user-name>
+                        <password>mg</password>
+                    </security>
+                    <validation>
+                        <valid-connection-checker class-name="org.jboss.jca.adapters.jdbc.extensions.oracle.OracleValidConnectionChecker"/>
+                        <check-valid-connection-sql>select ISVALIDSESSION from dual</check-valid-connection-sql>
+                        <background-validation>true</background-validation>
+                        <stale-connection-checker class-name="org.jboss.jca.adapters.jdbc.extensions.oracle.OracleStaleConnectionChecker"/>
+                        <exception-sorter class-name="org.jboss.jca.adapters.jdbc.extensions.oracle.OracleExceptionSorter"/>
+                    </validation>
+                </datasource>
+                <datasource jta="true" jndi-name="java:/MemoryGameDataDS" pool-name="MemoryGameDataDS" enabled="true" use-java-context="true" use-ccm="true" statistics-enabled="${wildfly.datasources.statistics-enabled:${wildfly.statistics-enabled:false}}">
+                    <connection-url>jdbc:oracle:thin:@localhost:1521:xe</connection-url>
+                    <driver-class>oracle.jdbc.driver.OracleDriver</driver-class>
+                    <driver>oracle</driver>
+                    <pool>
+                        <min-pool-size>1</min-pool-size>
+                        <max-pool-size>20</max-pool-size>
+                    </pool>
+                    <security>
+                        <user-name>MGD</user-name>
+                        <password>mgd</password>
+                    </security>
+                    <validation>
+                        <valid-connection-checker class-name="org.jboss.jca.adapters.jdbc.extensions.oracle.OracleValidConnectionChecker"/>
+                        <check-valid-connection-sql>select ISVALIDSESSION from dual</check-valid-connection-sql>
+                        <background-validation>true</background-validation>
+                        <stale-connection-checker class-name="org.jboss.jca.adapters.jdbc.extensions.oracle.OracleStaleConnectionChecker"/>
+                        <exception-sorter class-name="org.jboss.jca.adapters.jdbc.extensions.oracle.OracleExceptionSorter"/>
+                    </validation>
+                </datasource>
+            
