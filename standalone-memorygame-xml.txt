@@ -74,4 +74,8 @@
                         <exception-sorter class-name="org.jboss.jca.adapters.jdbc.extensions.oracle.OracleExceptionSorter"/>
                     </validation>
                 </datasource>
+		
+		<!-- add allow-non-standard-wrappers="true" to: <servlet-container name="default"> -->
+		<!-- this allows the rendering jsp templates -->
+		<servlet-container name="default" allow-non-standard-wrappers="true">
             
