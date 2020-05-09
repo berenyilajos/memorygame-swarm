@@ -19,8 +19,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import hu.icell.common.dto.ResultDTO;
 import hu.icell.common.dto.UserDTO;
-import hu.icell.dao.impl.ResultDaoEjb;
-import hu.icell.dao.impl.ResultDataDaoEjb;
+import hu.icell.dao.interfaces.ResultDaoLocal;
+import hu.icell.dao.interfaces.ResultDataDaoLocal;
 import hu.icell.dto.helper.DtoHelper;
 import hu.icell.entities.Result;
 import hu.icell.entities.User;
@@ -34,10 +34,10 @@ public class ResultManagerEjbTest {
     private ResultManagerEjb underTest;
     
     @Mock
-    private ResultDaoEjb resultDao;
+    private ResultDaoLocal resultDao;
 
     @Mock
-    private ResultDataDaoEjb resultDataDao;
+    private ResultDataDaoLocal resultDataDao;
     
     @Mock
     private Result testResult;
