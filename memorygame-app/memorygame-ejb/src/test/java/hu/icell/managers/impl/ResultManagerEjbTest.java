@@ -19,13 +19,12 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import hu.icell.common.dto.ResultDTO;
 import hu.icell.common.dto.UserDTO;
+import hu.icell.dao.impl.ResultDaoEjb;
 import hu.icell.dao.interfaces.ResultDaoLocal;
 import hu.icell.dao.interfaces.ResultDataDaoLocal;
-import hu.icell.dto.helper.DtoHelper;
 import hu.icell.entities.Result;
 import hu.icell.entities.User;
 import hu.icell.exception.MyApplicationException;
-import hu.icell.managers.impl.ResultManagerEjb;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ResultManagerEjbTest {
