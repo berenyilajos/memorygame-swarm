@@ -10,7 +10,6 @@ MANIFEST.MF
 .tern-project
 *.iml
 .sts4-cache/
-
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
