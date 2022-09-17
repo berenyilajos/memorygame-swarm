@@ -66,6 +66,11 @@
 			<groupId>org.mvc-spec.ozark.ext</groupId>
 			<artifactId>ozark-thymeleaf</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.1</version>
+		</dependency>
 		<!-- Wildfly Swarm dependencies -->
 		<dependency>
 		   <groupId>io.thorntail</groupId>

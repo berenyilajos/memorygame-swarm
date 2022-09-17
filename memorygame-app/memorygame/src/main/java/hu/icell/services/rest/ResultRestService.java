@@ -22,6 +22,7 @@ import hu.icell.common.dto.UserDTO;
 import hu.icell.common.logger.AppLogger;
 import hu.icell.common.logger.ThisLogger;
 import hu.icell.exception.MyApplicationException;
+import hu.icell.jwt.JwtUtil;
 import hu.icell.jwt.RestSecure;
 import hu.icell.managers.interfaces.ResultDataManagerRemote;
 import hu.icell.managers.interfaces.ResultManagerRemote;
@@ -51,7 +52,7 @@ public class ResultRestService extends BaseService {
     @Path("/save")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @RestSecure
+    @RestSecure(role = JwtUtil.USER_ROLE)
     public ResultResponse saveAction(@Context HttpServletRequest request,  ResultRequest resultRequest) throws MyApplicationException {
         
         log.debug("ResultRestService.saveAction >>>");
@@ -103,7 +104,7 @@ public class ResultRestService extends BaseService {
     @GET
     @Path(value = "/betterorequals/{seconds:\\d+}")
     @Produces(MediaType.APPLICATION_JSON)
-    @RestSecure
+    @RestSecure(role = JwtUtil.USER_ROLE)
     public List<ResultDTO> getResultsBetterOrEquals(@PathParam("seconds") long seconds) {
         return resultManager.getResultsBetterOrEquals(seconds);
     }

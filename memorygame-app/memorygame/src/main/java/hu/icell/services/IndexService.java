@@ -28,6 +28,7 @@ import hu.icell.common.dto.UserDTO;
 import hu.icell.common.logger.AppLogger;
 import hu.icell.common.logger.ThisLogger;
 import hu.icell.exception.UserAllreadyExistException;
+import hu.icell.jwt.JwtUtil;
 import hu.icell.managers.interfaces.IndexManagerRemote;
 
 @Controller
@@ -41,6 +42,9 @@ public class IndexService {
 
     @Inject
     BindingResult bindingResult;
+    
+    @Inject
+    private JwtUtil jwtUtil;
 	
 	@Inject
 	private IndexManagerRemote indexManager;
@@ -65,6 +69,8 @@ public class IndexService {
                 return "redirect://login";
             }
         }
+        String token = jwtUtil.generateToken(user.getUsername());
+        models.put("token", token);
         log.debug("<<< IndexService.indexAction");
         return "index.html";
     }
@@ -88,7 +94,7 @@ public class IndexService {
                 HttpSession session = request.getSession(true);
                 session.setAttribute("user", user);
                 request.login(username, Encrypter.getMD5(password));
-                log.info("Login successful. User principal after login: " + request.getUserPrincipal());
+                log.info("Login successful. User principal after login: " + request.getUserPrincipal() + ", in role " + JwtUtil.USER_ROLE + ": " + securityContext.isUserInRole(JwtUtil.USER_ROLE));
                 return "redirect:";
             }
         }
