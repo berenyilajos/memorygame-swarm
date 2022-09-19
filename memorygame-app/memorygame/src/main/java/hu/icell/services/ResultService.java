@@ -24,7 +24,6 @@ import hu.icell.common.dto.ResultDTO;
 import hu.icell.common.dto.UserDTO;
 import hu.icell.common.logger.AppLogger;
 import hu.icell.common.logger.ThisLogger;
-import hu.icell.exception.MyApplicationException;
 import hu.icell.managers.interfaces.ResultManagerRemote;
 
 @Controller
