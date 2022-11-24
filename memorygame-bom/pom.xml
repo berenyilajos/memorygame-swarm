@@ -26,7 +26,7 @@
 		<version.org.codehaus.jackson.jackson-mapper-asl>1.9.13</version.org.codehaus.jackson.jackson-mapper-asl>
 		<version.xerces.xercesImpl>2.11.0</version.xerces.xercesImpl>
 		<version.org.hibernate.hibernate-entitymanager>5.2.10.Final</version.org.hibernate.hibernate-entitymanager>
-		<version.org.hibernate.hibernate-core>5.2.10.Final</version.org.hibernate.hibernate-core>
+		<version.org.hibernate.hibernate-core>5.3.20.Final</version.org.hibernate.hibernate-core>
 		<version.org.hibernate.common.hibernate-commons-annotations>5.0.1.Final</version.org.hibernate.common.hibernate-commons-annotations>
 		<version.org.hibernate.javax.persistence.hibernate-jpa-2.1-api>1.0.0.Final</version.org.hibernate.javax.persistence.hibernate-jpa-2.1-api>
 		<version.org.jboss.logging.jboss-logging>3.3.0.Final</version.org.jboss.logging.jboss-logging>
